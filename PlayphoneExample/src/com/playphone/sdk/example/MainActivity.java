@@ -72,6 +72,10 @@ public class MainActivity extends ListActivity {
                     @Override public String toString() { return "VirtualItem Basics"; }
                     @Override public void run() 	{ startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));}
                 },
+                new Entry() {
+                    @Override public String toString() { return "MultiPlayer Basics"; }
+                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));}
+                },
 				new Entry() {
 					@Override public String toString() { return "Logout of Playphone"; }
 					@Override public void run()        { if(MNDirect.isUserLoggedIn()) MNDirect.getSession().logout(); 
