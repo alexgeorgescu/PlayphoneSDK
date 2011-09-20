@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.playphone.multinet.MNScoreProgressSideBySideView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/widget_scoreprogressview"  
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content">
+	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/multiplay_plugin" android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+		<AbsoluteLayout android:id="@+id/fld_left_user" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mnprogressindicator_sticker_blue">
+			<ImageView android:id="@+id/fld_left_avatar" android:layout_x="3dp" android:src="@drawable/mnprogressindicator_sticker_avatar" android:scaleType="fitXY" android:layout_width="56dp" android:layout_height="64dp" android:layout_y="5dp"/>
+			<TextView android:id="@+id/lbl_left_user_name" android:layout_height="wrap_content" android:text="name" android:lines="2" android:layout_y="5dp" android:textColor="#fff" android:typeface="serif" android:layout_x="60dp" android:layout_width="wrap_content"/>
+			<TextView android:id="@+id/lbl_left_user_score" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="score" android:layout_y="45dp" android:textColor="#fff" android:typeface="serif" android:layout_x="100dp"/>
+			<TextView android:id="@+id/lbl_left_user_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mnprogressindicator_sticker_arrow" android:gravity="center" android:text="1st" android:layout_y="40dp" android:textColor="#000" android:typeface="serif" android:layout_x="60dp"/>
+		</AbsoluteLayout>
+		<AbsoluteLayout android:id="@+id/fld_right_user" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/mnprogressindicator_sticker_blue">
+			<ImageView android:id="@+id/fld_right_avatar" android:layout_x="3dp" android:src="@drawable/mnprogressindicator_sticker_avatar" android:layout_height="64dp" android:layout_width="56dp" android:scaleType="fitXY" android:layout_y="5dp"/>
+			<TextView android:id="@+id/lbl_right_user_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="name" android:layout_y="5dp" android:lines="2" android:textColor="#fff" android:typeface="serif" android:layout_x="60dp"/>
+			<TextView android:id="@+id/lbl_right_user_score" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="score" android:layout_y="45dp" android:textColor="#fff" android:typeface="serif" android:layout_x="100dp"/>
+			<TextView android:id="@+id/lbl_right_user_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1st" android:background="@drawable/mnprogressindicator_sticker_arrow" android:gravity="center" android:layout_y="40dp" android:textColor="#000" android:typeface="serif" android:layout_x="60dp"/>
+		</AbsoluteLayout>
+	</LinearLayout>
+</com.playphone.multinet.MNScoreProgressSideBySideView>

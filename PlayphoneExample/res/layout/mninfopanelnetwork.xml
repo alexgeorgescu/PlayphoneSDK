@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:visibility="visible" android:id="@+id/network_popup" android:layout_height="38dp">
+      <RelativeLayout android:background="@drawable/mndirectpopup_m" android:layout_height="38dp" android:gravity="left" android:layout_marginLeft="15dp" android:layout_width="fill_parent" android:layout_marginRight="15dp" android:id="@+id/fillarea">
+      </RelativeLayout>
+      <ImageView android:layout_width="wrap_content" android:src="@drawable/mndirectpopup_l" android:layout_alignParentLeft="true" android:layout_height="38dp" android:scaleType="fitXY" android:id="@+id/mndirect_popup_leftpart"></ImageView>
+      <ImageView android:layout_height="38dp" android:scaleType="fitXY" android:src="@drawable/mndirectpopup_r" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:id="@+id/mndirect_popup_rightpart"></ImageView>
+      <TextView android:textColor="#636363" android:text="Welcome back, {0}" android:layout_height="wrap_content" android:layout_width="fill_parent" android:paddingLeft="40dp" android:id="@+id/mndirect_popup_text" android:layout_marginTop="10dp"></TextView>
+      <ImageView android:layout_height="32dp" android:scaleType="fitXY" android:src="@drawable/mndirectpopup_avatar_empty" android:layout_width="32dp" android:id="@+id/mndirect_popup_icon" android:layout_marginLeft="4dp" android:layout_marginTop="4dp"></ImageView>
+  </RelativeLayout>

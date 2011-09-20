@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LinearLayout -->
+<com.playphone.multinet.MNScoreProgressHorisontalView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/mnprogresindicatorhorizontal_widget"  
+    android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="40dip">
+	 
+<TextView
+    android:tag="MNScoreProgressPluginConfig"
+	android:text="delay=1000;interval=1000"
+    android:visibility="gone"
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" /> 
+
+<LinearLayout 
+	android:id="@+id/mnprogresindicatorhorizontal_layout_top" 
+	android:layout_height="20sp"
+	android:layout_width="fill_parent"
+	android:background="@drawable/mnprogresindicatorhorizontal_bgr_win"	
+	>
+	
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:id="@+id/mnprogresindicatorhorizontal_my_number" 
+	android:text="1" 
+	android:layout_gravity="center_vertical" 
+	android:textSize="16sp" 
+	android:width="30sp" 
+	android:gravity="center_vertical|center_horizontal" 
+	android:textColor="#FFFFFF" 
+	android:height="20sp">
+</TextView>
+
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_gravity="center_vertical" 
+	android:textSize="16sp" 
+	android:textColor="#FFFFFF" 
+	android:id="@+id/mnprogresindicatorhorizontal_my_name" 
+	android:width="170sp" 
+	android:text="John Smith" 
+	android:gravity="left|center_vertical" 
+	android:typeface="normal" 
+	android:layout_height="20sp" 
+	android:height="20sp">
+</TextView>
+
+<TextView 
+	android:layout_height="wrap_content" 
+	android:textSize="16sp" 
+	android:textColor="#FFFFFF" 
+	android:typeface="normal" 
+	android:gravity="right|center_vertical" 
+	android:layout_width="80sp" 
+	android:text="+1,200" 
+	android:id="@+id/mnprogresindicatorhorizontal_my_progress" 
+	android:height="20sp" android:layout_gravity="right|center_vertical">
+</TextView>
+
+<ImageView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:background="@drawable/mnprogresindicatorhorizontal_arrow_up" 
+	android:layout_gravity="center_vertical" 
+	android:layout_marginLeft="6sp"
+	android:id="@+id/mnprogresindicatorhorizontal_my_arrow">
+</ImageView>
+
+</LinearLayout>
+
+<LinearLayout 
+	android:id="@+id/mnprogresindicatorhorizontal_layout_bottom" 
+	android:layout_height="20sp"
+	android:layout_below="@+id/mnprogresindicatorhorizontal_layout_top"
+	android:layout_centerHorizontal="true"
+	android:layout_width="fill_parent" android:background="@drawable/mnprogresindicatorhorizontal_bgr_my">
+	
+<TextView 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content" 
+	android:layout_gravity="center_vertical" 
+	android:textSize="16sp" 
+	android:width="30sp" 
+	android:gravity="center_vertical|center_horizontal" 
+	android:id="@+id/mnprogresindicatorhorizontal_opp_number" 
+	android:text="2" 
+	android:textColor="#A3AdB6" 
+	android:height="20sp">
+</TextView>
+
+<TextView 
+	android:layout_height="wrap_content" 
+	android:layout_gravity="center_vertical" 
+	android:textSize="16sp" 
+	android:gravity="left|center_vertical" 
+	android:typeface="normal" 
+	android:id="@+id/mnprogresindicatorhorizontal_opp_name" 
+	android:text="Marissa PlayPhone" 
+	android:width="290sp" 
+	android:textColor="#A3AdB6" 
+	android:height="20sp" android:layout_width="wrap_content">
+</TextView>
+
+</LinearLayout>
+
+</com.playphone.multinet.MNScoreProgressHorisontalView>
+<!-- /LinearLayout -->

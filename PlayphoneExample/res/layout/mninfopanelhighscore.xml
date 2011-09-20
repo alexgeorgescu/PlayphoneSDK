@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:visibility="visible"
+    android:id="@+id/highscore_popup" android:layout_height="40dp">
+      <RelativeLayout android:background="@drawable/mndirectpopup_m" android:layout_height="38dp" android:gravity="left" android:layout_marginLeft="15dp" android:layout_width="fill_parent" android:layout_marginRight="15dp" android:id="@+id/fillarea">
+      </RelativeLayout>
+      <ImageView android:id="@+id/mndirect_popup_leftpart" android:layout_width="wrap_content" android:src="@drawable/mndirectpopup_l" android:layout_alignParentLeft="true" android:layout_height="38dp" android:scaleType="fitXY"></ImageView>
+      <ImageView android:layout_height="38dp" android:scaleType="fitXY" android:src="@drawable/mndirectpopup_r" android:layout_width="wrap_content" android:id="@+id/mndirect_popup_rightpart" android:layout_alignParentRight="true"></ImageView>
+      <TextView android:textColor="#636363" android:text="You have reached the best value" android:layout_height="wrap_content" android:layout_width="fill_parent" android:paddingLeft="40dp" android:layout_marginTop="10dp" android:id="@+id/mndirect_popup_text"></TextView>
+  </RelativeLayout>
