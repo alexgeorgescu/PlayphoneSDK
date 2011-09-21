@@ -75,20 +75,15 @@ public class MainActivity extends ListActivity {
                 },
                 new Entry() {
                     @Override public String toString() { return "MultiPlayer Basics"; }
-                    @Override public void run() 	{ /*MNDirect.execAppCommand("jumpToUserProfile",null);*/ 
+                    @Override public void run() 	{ 
                     									/*startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));*/
-														MNDirectUIHelper.showDashboard();
+                    									MNDirect.execAppCommand("jumpToUserHome",null);
+                    									MNDirectUIHelper.showDashboard();
 														Toast.makeText(MainActivity.this, "Click \"Play Now\" to join a multiplayer room and send messages", Toast.LENGTH_LONG).show();}
                 },
 				new Entry() {
 					@Override public String toString() { return "Logout of Playphone"; }
-					@Override public void run()        { if(MNDirect.isUserLoggedIn()) MNDirect.getSession().logout(); 
-														MNDirectUIHelper.showDashboard();}
-				},
-				new Entry() {
-					@Override public String toString() { return "Logout of Playphone (wipe credentials)"; }
-					@Override public void run()        { if(MNDirect.isUserLoggedIn()) MNDirect.getSession().logoutAndWipeUserCredentialsByMode(MNSession.MN_CREDENTIALS_WIPE_USER);
-														MNDirectUIHelper.showDashboard();}
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, LogoutActivity.class));}
 				}
 		};
 	}
@@ -154,6 +149,12 @@ public class MainActivity extends ListActivity {
 			if(sender != null)
 			Toast.makeText(getApplicationContext(), "User " + sender.userName + 
 					" sent message: " +  message, Toast.LENGTH_LONG).show();
+		}
+		
+		public void mnDirectSessionStatusChanged(int newStatus)
+		{
+			
+			Log.d("playphone","The new status is " + newStatus);
 		}
 	}
 }

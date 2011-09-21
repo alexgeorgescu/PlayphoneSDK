@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+        <TextView android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView1" android:text="Type a message to send to other users" android:layout_alignBaseline="@+id/editText1" android:layout_alignBottom="@+id/editText1" android:layout_alignParentLeft="true" android:layout_width="match_parent"></TextView>
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/txtResult" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_below="@+id/btnUpload"></TextView>
+        <Button android:text="Back to Main" android:layout_height="wrap_content" android:id="@+id/btnBack" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_width="match_parent"></Button>
+        <Button android:text="Logout" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/btnLogout" android:layout_below="@+id/textView1" android:layout_alignParentLeft="true" android:layout_marginTop="58dp"></Button>
+        <Button android:text="Logout (wipe credentials)" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/btnLogoutWipe" android:layout_below="@+id/btnLogout" android:layout_alignParentLeft="true" android:layout_marginTop="33dp"></Button>
+    </RelativeLayout>
+    

@@ -58,20 +58,5 @@ public class MultiPlayerActivity extends Activity {
 		super.onResume();
 		MNDirectUIHelper.setHostActivity(this);
 	}
-	
-	
-	protected class MNEventHandler extends MNDirectEventHandlerAbstract {
-   	 
-		
-		@Override
-		public void mnDirectDidReceiveGameMessage(String message,MNUserInfo sender)
-		{
-			Log.d("playphone","Received a message: " + message);
-			if(sender != null)
-			Toast.makeText(MultiPlayerActivity.this, "User " + sender.userName + 
-					" sent message: " +  message, Toast.LENGTH_LONG).show();
-		}
-	}
-	
 
 }
