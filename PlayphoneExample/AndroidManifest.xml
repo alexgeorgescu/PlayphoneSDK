@@ -32,6 +32,10 @@
               android:configChanges="orientation|keyboard|keyboardHidden"/>
         <activity android:name=".BuyItemsActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:name=".CurrentUserInfoActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:name=".MultiPlayerActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
               
         <receiver android:name="com.playphone.multinet.core.MNInstallReferrerReceiver"
           android:exported="true">

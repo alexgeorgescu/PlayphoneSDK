@@ -7,6 +7,7 @@ import com.playphone.multinet.core.MNSession;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,7 +59,7 @@ public class MainActivity extends ListActivity {
 				},
 				new Entry() {
 					@Override public String toString() { return "Current User"; }
-					@Override public void run()        { startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));/*Toast.makeText(getApplicationContext(), "My username: " + MNDirect.getSession().getMyUserName(), Toast.LENGTH_LONG);*/ }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, CurrentUserInfoActivity.class));}
 				},
 				new Entry() {
 					@Override public String toString() { return "Cloud Storage basics"; }
@@ -74,7 +75,10 @@ public class MainActivity extends ListActivity {
                 },
                 new Entry() {
                     @Override public String toString() { return "MultiPlayer Basics"; }
-                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));}
+                    @Override public void run() 	{ /*MNDirect.execAppCommand("jumpToUserProfile",null);*/ 
+                    									/*startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));*/
+														MNDirectUIHelper.showDashboard();
+														Toast.makeText(MainActivity.this, "Click \"Play Now\" to join a multiplayer room and send messages", Toast.LENGTH_LONG).show();}
                 },
 				new Entry() {
 					@Override public String toString() { return "Logout of Playphone"; }
@@ -138,7 +142,18 @@ public class MainActivity extends ListActivity {
     	 
 		@Override
 		public void mnDirectDoStartGameWithParams(MNGameParams params) {
-			startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));
+			startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
+		}
+		
+		
+		
+		@Override
+		public void mnDirectDidReceiveGameMessage(String message,MNUserInfo sender)
+		{
+			Log.d("playphone","Received message: " + message);
+			if(sender != null)
+			Toast.makeText(getApplicationContext(), "User " + sender.userName + 
+					" sent message: " +  message, Toast.LENGTH_LONG).show();
 		}
 	}
 }
