@@ -22,7 +22,7 @@ public class BuyItemsActivity extends Activity implements Callback {
 
 	final int HEALTH_POTION = 2;
 	final int HEALTH_POTION_PACK = 1002;
-	final String HEALTH_POTION_NAME = "health potion(s)";
+	final String HEALTH_POTION_NAME = "Health Potion(s)";
 	Handler handler = new Handler(this);
 	TextView txtTitle;
 	

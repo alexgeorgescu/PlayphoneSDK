@@ -87,7 +87,7 @@ public class PostAchievementActivity extends Activity implements OnClickListener
 		List<Integer> achievementList = new ArrayList<Integer>();
 		for( GameAchievementInfo info : MNDirect.getAchievementsProvider().getGameAchievementsList())
 		{
-			Log.d("Playphone","Found ID" + info.id + " Description: " + info.description);
+			Log.d("playphone","Found ID" + info.id + " Description: " + info.description);
 			achievementList.add(info.id);
 		}
 		

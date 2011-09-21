@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.net.ssl.HandshakeCompletedListener;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,10 +50,15 @@ public class PostCloudStorageActivity extends Activity implements OnClickListene
         txtResult = (TextView) findViewById(R.id.txtResult);
         
         editInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
+        	@Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+                else
+                {
+                	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                	imm.hideSoftInputFromWindow(editInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
@@ -109,6 +116,7 @@ public class PostCloudStorageActivity extends Activity implements OnClickListene
 			
 			@Override
 			public void onClick(View v) {
+				editInput.clearFocus();
 				if(MNDirect.isUserLoggedIn())
 				{
 					txtResult.setText("");
@@ -145,6 +153,7 @@ public class PostCloudStorageActivity extends Activity implements OnClickListene
 
 	@Override
 	public void onClick(View arg0) {
+		editInput.clearFocus();
 		if(MNDirect.isUserLoggedIn())
 		{
 		int random_int = rand.nextInt(5);
