@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/LinearLayout1" android:layout_height="match_parent" android:orientation="vertical">
+        <TextView android:layout_height="0dp" android:layout_width="match_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:text="Currently, you are not logged in!" android:id="@+id/textView1" android:layout_weight="1"></TextView>
+        <Button android:text="Use a potion (using player inventory management API)" android:layout_width="match_parent" android:id="@+id/btnUsePotion" android:layout_height="0dp" android:layout_weight="1"></Button>
+        <Button android:text="Get one free potion!" android:layout_weight="1" android:id="@+id/btnGetFreePotion" android:layout_height="0dp" android:layout_width="match_parent"></Button>
+        <Button android:text="Buy more potions!" android:layout_width="match_parent" android:id="@+id/btnBuy" android:layout_weight="1" android:layout_height="0dp"></Button>
+        <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/txtResult" android:layout_height="0dp" android:layout_width="match_parent" android:layout_weight="1"></TextView>
+        <Button android:text="Back to Main" android:layout_height="0dp" android:layout_width="match_parent" android:id="@+id/btnBack" android:layout_weight="1"></Button>
+    </LinearLayout>
+    

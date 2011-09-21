@@ -65,12 +65,12 @@ public class MainActivity extends ListActivity {
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostCloudStorageActivity.class)); }
 				},
 				new Entry() {
-					@Override public String toString() { return "Purchase credits (live)"; }
-					@Override public void run()        { startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class)); }
+					@Override public String toString() { return "Purchase and manage potions (sample in-game item)"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, BuyItemsActivity.class)); }
 				},
 				new Entry() {
                     @Override public String toString() { return "VirtualItem Basics"; }
-                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, PlayphoneExampleActivity.class));}
+                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, VirtualItemsActivity.class));}
                 },
                 new Entry() {
                     @Override public String toString() { return "MultiPlayer Basics"; }
