@@ -4,9 +4,12 @@ package com.playphone.sdk.example;
 import com.playphone.multinet.*;
 import com.playphone.multinet.core.MNSession;
 
+import android.app.ActivityManager;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,8 +24,10 @@ public class MainActivity extends ListActivity {
 	// application specific information
 	private int _GAMEID = MyPlayphoneCredentials._GAMEID;
 	private String _APISECRET = MyPlayphoneCredentials._APISECRET;
+	private static MNEventHandler eventHandler = null;
 	
 	
+	public static MNEventHandler getMNEventHandler(){return eventHandler;}
 	
 	protected interface Entry {
 		public String toString();
@@ -34,6 +39,12 @@ public class MainActivity extends ListActivity {
 				new Entry() {
 					@Override public String toString() { return "Dashboard"; }
 					@Override public void run()        { MNDirect.execAppCommand("jumpToUserProfile",null);
+														MNDirectUIHelper.showDashboard();
+														}
+				},
+				new Entry() {
+					@Override public String toString() { return "Dashboard: Friends"; }
+					@Override public void run()        { MNDirect.execAppCommand("jumpToBuddyList",null); 
 														MNDirectUIHelper.showDashboard();
 														}
 				},
@@ -58,7 +69,7 @@ public class MainActivity extends ListActivity {
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostAchievementActivity.class)); }
 				},
 				new Entry() {
-					@Override public String toString() { return "Current User"; }
+					@Override public String toString() { return "Current User Info"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, CurrentUserInfoActivity.class));}
 				},
 				new Entry() {
@@ -82,7 +93,7 @@ public class MainActivity extends ListActivity {
 														Toast.makeText(MainActivity.this, "Click \"Play Now\" to join a multiplayer room and send messages", Toast.LENGTH_LONG).show();}
                 },
 				new Entry() {
-					@Override public String toString() { return "Logout of Playphone"; }
+					@Override public String toString() { return "Logout from Playphone"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, LogoutActivity.class));}
 				}
 		};
@@ -105,8 +116,10 @@ public class MainActivity extends ListActivity {
 			}
 		});
 		
+		eventHandler = new MNEventHandler();
+		
 		MNDirect.init(this._GAMEID, this._APISECRET,
-				new MNEventHandler(), this);
+				eventHandler, this);
 		
 		MNDirect.handleApplicationIntent(getIntent());
 
@@ -135,6 +148,16 @@ public class MainActivity extends ListActivity {
     
     protected class MNEventHandler extends MNDirectEventHandlerAbstract {
     	 
+		private Handler handler;
+		
+		public Handler getHandler() {
+			return handler;
+		}
+
+		public void setHandler(Handler handler) {
+			this.handler = handler;
+		}
+
 		@Override
 		public void mnDirectDoStartGameWithParams(MNGameParams params) {
 			startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
@@ -151,9 +174,17 @@ public class MainActivity extends ListActivity {
 					" sent message: " +  message, Toast.LENGTH_LONG).show();
 		}
 		
+		@Override
 		public void mnDirectSessionStatusChanged(int newStatus)
 		{
-			
+			if(handler != null)
+			{
+				Message msg = new Message();
+				Bundle bundle = new Bundle();
+				bundle.putInt("statusChange", newStatus);
+				msg.setData(bundle); 
+				handler.sendMessage(msg);
+			}
 			Log.d("playphone","The new status is " + newStatus);
 		}
 	}

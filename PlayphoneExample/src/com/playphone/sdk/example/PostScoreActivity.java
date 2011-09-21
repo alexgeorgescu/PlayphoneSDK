@@ -4,10 +4,13 @@ import com.playphone.multinet.MNDirect;
 import com.playphone.multinet.MNDirectUIHelper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +36,11 @@ public class PostScoreActivity extends Activity implements OnClickListener{
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+                else
+                {
+                	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                	imm.hideSoftInputFromWindow(editInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
@@ -64,8 +72,9 @@ public class PostScoreActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View arg0) {
+		editInput.clearFocus();
 		MNDirect.postGameScore(Long.valueOf(editInput.getText().toString()));
-		txtResult.setText("Updated your score " + editInput.getText().toString() + " to the Leaderboards");
+		txtResult.setText("Updated your score of " + editInput.getText().toString() + " on the Leaderboards");
 		
 	}
 

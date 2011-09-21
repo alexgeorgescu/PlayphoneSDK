@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.playphone.multinet.MNDirect;
 import com.playphone.multinet.MNDirectUIHelper;
@@ -38,6 +41,11 @@ public class PostAchievementActivity extends Activity implements OnClickListener
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+                else
+                {
+                	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                	imm.hideSoftInputFromWindow(editInput.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
             }
         });
@@ -69,6 +77,13 @@ public class PostAchievementActivity extends Activity implements OnClickListener
 
 	@Override
 	public void onClick(View arg0) {
+		editInput.clearFocus();
+		if(!MNDirect.isUserLoggedIn())
+		{
+			Toast.makeText(this, "User is not yet logged in...", Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
 		List<Integer> achievementList = new ArrayList<Integer>();
 		for( GameAchievementInfo info : MNDirect.getAchievementsProvider().getGameAchievementsList())
 		{
@@ -87,7 +102,7 @@ public class PostAchievementActivity extends Activity implements OnClickListener
 		{
 			txtResult.setText("Achievement " + response + " does not exist");
 		}
-		
+		}
 	}
 
 }

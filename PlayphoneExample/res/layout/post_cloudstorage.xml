@@ -6,7 +6,7 @@
         </EditText>
         <Button android:text="Read cloud storage" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/editInput" android:layout_alignParentLeft="true" android:layout_marginTop="80dp" android:layout_alignRight="@+id/editInput" android:id="@+id/btnRead"></Button>
         <Button android:text="Store on the cloud" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/editInput" android:layout_alignParentLeft="true" android:layout_marginTop="34dp" android:layout_alignParentRight="true" android:id="@+id/btnWrite"></Button>
-        <Button android:text="Back to Main" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/btnBack" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_marginBottom="55dp" android:layout_alignParentRight="true"></Button>
         <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/txtResult" android:layout_below="@+id/btnRead" android:layout_alignParentLeft="true" android:layout_marginTop="29dp" android:layout_alignRight="@+id/btnRead"></TextView>
+        <Button android:text="Back to Main" android:layout_height="wrap_content" android:id="@+id/btnBack" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:layout_width="match_parent"></Button>
     </RelativeLayout>
     
