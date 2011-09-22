@@ -18,7 +18,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class VirtualItemsActivity extends Activity implements OnClickListener{
+public class VirtualItemsActivity extends CustomTitleActivity implements OnClickListener{
 
 	
 	TextView txtResult;

@@ -28,7 +28,7 @@ import com.playphone.multinet.providers.MNAchievementsProvider.GameAchievementIn
 import com.playphone.multinet.providers.MNAchievementsProvider.PlayerAchievementInfo;
 import com.playphone.multinet.providers.MNGameCookiesProvider.IEventHandler;
 
-public class PostCloudStorageActivity extends Activity implements OnClickListener, Handler.Callback{
+public class PostCloudStorageActivity extends CustomTitleActivity implements OnClickListener, Handler.Callback{
 	EditText editInput;
 	TextView txtResult;
 	

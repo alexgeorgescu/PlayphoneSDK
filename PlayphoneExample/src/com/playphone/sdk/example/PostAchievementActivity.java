@@ -21,7 +21,7 @@ import com.playphone.multinet.MNDirectUIHelper;
 import com.playphone.multinet.providers.MNAchievementsProvider.GameAchievementInfo;
 import com.playphone.multinet.providers.MNAchievementsProvider.PlayerAchievementInfo;
 
-public class PostAchievementActivity extends Activity implements OnClickListener{
+public class PostAchievementActivity extends CustomTitleActivity implements OnClickListener{
 	EditText editInput;
 	TextView txtResult;
 	

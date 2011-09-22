@@ -8,7 +8,7 @@ import com.playphone.multinet.MNDirect;
 import com.playphone.multinet.MNDirectUIHelper;
 import com.playphone.multinet.core.MNSession;
 
-public class LogoutActivity extends Activity{
+public class LogoutActivity extends CustomTitleActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

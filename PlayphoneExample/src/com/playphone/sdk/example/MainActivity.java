@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -103,7 +105,10 @@ public class MainActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		
 		final Entry[] entries = getEntries();
 		setListAdapter(new ArrayAdapter<Entry>(this, R.layout.main_menu_item, entries));
 		
@@ -123,9 +128,11 @@ public class MainActivity extends ListActivity {
 		
 		MNDirect.handleApplicationIntent(getIntent());
 
-		MNDirectButton.initWithLocation(MNDirectButton.MNDIRECTBUTTON_BOTTOMRIGHT);
+		MNDirectButton.initWithLocation(MNDirectButton.MNDIRECTBUTTON_TOPLEFT);
 		
 		MNDirectPopup.init(MNDirectPopup.MNDIRECTPOPUP_ALL);
+		
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 	}
 
     @Override

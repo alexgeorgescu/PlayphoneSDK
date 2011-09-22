@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTheme" parent="android:Theme">
+        <item name="android:windowTitleSize">40dip</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+    <style name="customtheme_title" parent="android:Theme">
+        <item name="android:windowTitleSize">40dip</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:gravity">center</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">#fff</item>
+    </style>
+</resources>

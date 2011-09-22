@@ -8,7 +8,7 @@ import com.playphone.multinet.MNDirectUIHelper;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class PlayphoneExampleActivity extends Activity {
+public class PlayphoneExampleActivity extends CustomTitleActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

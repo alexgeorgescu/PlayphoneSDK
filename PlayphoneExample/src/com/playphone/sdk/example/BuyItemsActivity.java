@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BuyItemsActivity extends Activity implements Callback {
+public class BuyItemsActivity extends CustomTitleActivity implements Callback {
 
 	final int HEALTH_POTION = 2;
 	final int HEALTH_POTION_PACK = 1002;

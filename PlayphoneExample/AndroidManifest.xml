@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application android:icon="@drawable/playphone_sdk" android:label="@string/app_name">
-        <activity android:name=".MainActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".MainActivity"
                   android:label="@string/app_name"
                   android:configChanges="orientation|keyboard|keyboardHidden">
             <intent-filter>
@@ -18,25 +18,25 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.playphone.multinet.core.MNProxyActivity"
+        <activity android:theme="@style/CustomTheme" android:name="com.playphone.multinet.core.MNProxyActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".PlayphoneExampleActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".PlayphoneExampleActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".PostScoreActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".PostScoreActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".PostAchievementActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".PostAchievementActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".PostCloudStorageActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".PostCloudStorageActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".VirtualItemsActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".VirtualItemsActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".BuyItemsActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".BuyItemsActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".CurrentUserInfoActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".CurrentUserInfoActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-        <activity android:name=".MultiPlayerActivity"
+        <activity android:theme="@style/CustomTheme" android:name=".MultiPlayerActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
-         <activity android:name=".LogoutActivity"
+         <activity android:theme="@style/CustomTheme" android:name=".LogoutActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
         <receiver android:name="com.playphone.multinet.core.MNInstallReferrerReceiver"
           android:exported="true">

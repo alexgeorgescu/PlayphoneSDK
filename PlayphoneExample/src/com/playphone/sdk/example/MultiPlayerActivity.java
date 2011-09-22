@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MultiPlayerActivity extends Activity {
+public class MultiPlayerActivity extends CustomTitleActivity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

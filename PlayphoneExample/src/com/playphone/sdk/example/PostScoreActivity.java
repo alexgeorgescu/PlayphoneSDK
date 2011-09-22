@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class PostScoreActivity extends Activity implements OnClickListener{
+public class PostScoreActivity extends CustomTitleActivity implements OnClickListener{
 	
 	EditText editInput;
 	TextView txtResult;
