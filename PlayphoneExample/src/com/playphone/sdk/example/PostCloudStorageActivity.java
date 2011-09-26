@@ -138,19 +138,7 @@ public class PostCloudStorageActivity extends CustomTitleActivity implements OnC
     }
     
     
-    @Override
-	protected void onPause() {
-		super.onPause();
-		MNDirectUIHelper.setHostActivity(null);
-	}
- 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		MNDirectUIHelper.setHostActivity(this);
-	}
-
-
+    
 	@Override
 	public void onClick(View arg0) {
 		editInput.clearFocus();

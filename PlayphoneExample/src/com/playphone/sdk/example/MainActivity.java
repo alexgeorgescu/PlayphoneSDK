@@ -83,8 +83,12 @@ public class MainActivity extends ListActivity {
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, BuyItemsActivity.class)); }
 				},
 				new Entry() {
-                    @Override public String toString() { return "VirtualItem Basics"; }
+                    @Override public String toString() { return "VirtualItem Basics (OBSOLETE)"; }
                     @Override public void run() 	{ startActivity(new Intent(MainActivity.this, VirtualItemsActivity.class));}
+                },
+                new Entry() {
+                    @Override public String toString() { return "Virtual Economy"; }
+                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, VirtualEconomyListActivity.class));}
                 },
                 new Entry() {
                     @Override public String toString() { return "MultiPlayer Basics"; }
@@ -104,6 +108,7 @@ public class MainActivity extends ListActivity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d("playphone","onCreate has been called for MainActivity");
 		super.onCreate(savedInstanceState);
 		
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -122,15 +127,12 @@ public class MainActivity extends ListActivity {
 		});
 		
 		eventHandler = new MNEventHandler();
-		
 		MNDirect.init(this._GAMEID, this._APISECRET,
-				eventHandler, this);
-		
+			eventHandler, this);
 		MNDirect.handleApplicationIntent(getIntent());
-
 		MNDirectButton.initWithLocation(MNDirectButton.MNDIRECTBUTTON_TOPLEFT);
-		
 		MNDirectPopup.init(MNDirectPopup.MNDIRECTPOPUP_ALL);
+		
 		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 	}

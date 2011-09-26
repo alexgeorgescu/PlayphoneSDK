@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <Button android:id="@+id/btnVItems" android:text="VItems" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_marginTop="30dip"></Button>
+    <TextView android:id="@+id/txtVItems" android:layout_height="wrap_content" android:layout_width="match_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/vitems_description" android:layout_below="@+id/btnVItems"></TextView>
+    <Button android:id="@+id/btnPlayphoneStore" android:text="Playphone Store" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtVItems" android:layout_marginTop="30dip"></Button>
+    <TextView android:id="@+id/txtPlayphoneStore" android:layout_height="wrap_content" android:layout_width="match_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/playphone_store_description" android:layout_below="@+id/btnPlayphoneStore"></TextView>
+    <Button android:id="@+id/btnInventory" android:text="User Inventory" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtPlayphoneStore" android:layout_marginTop="30dip"></Button>
+    <TextView android:id="@+id/txtInventory" android:layout_height="wrap_content" android:layout_width="match_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/user_inventory_description" android:layout_below="@+id/btnInventory"></TextView>
+</RelativeLayout>
