@@ -44,6 +44,8 @@
               android:configChanges="orientation|keyboard|keyboardHidden"/>
         <activity android:theme="@style/CustomTheme" android:name=".VirtualItemsListActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VirtualItemsDetailsActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
         <receiver android:name="com.playphone.multinet.core.MNInstallReferrerReceiver"
           android:exported="true">
     		<intent-filter>

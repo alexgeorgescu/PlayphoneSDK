@@ -3,9 +3,9 @@
     <string name="hello">Not yet implemented!</string>
     <string name="app_name">Playphone SDK Demo</string>
     <!-- Virtual Item pages -->
-    <string name="vitems_description">VItems description</string>
-    <string name="playphone_store_description">Playphone store description</string>
-    <string name="user_inventory_description">User inventory description</string>
+    <string name="vitems_description">These are the items used in the game</string>
+    <string name="playphone_store_description">Users can purchase these items on the Playphone Store</string>
+    <string name="user_inventory_description">Inventory can be tracked per user</string>
     <string name="get_virtual_items">Get Virtual Items</string>
     <string name="get_virtual_currencies">Get Virtual Currencies</string>
     
