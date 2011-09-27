@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <Button android:id="@+id/btnVShopCategoriesList" android:text="@string/get_vshop_categories_list" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnVShopPacksList" android:text="@string/get_vshop_packs_list" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnVShopCategoriesList" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnBuyVShopPacks" android:text="@string/get_buy_vshop_packs" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnVShopPacksList" android:layout_marginTop="30dip"></Button>
+</RelativeLayout>

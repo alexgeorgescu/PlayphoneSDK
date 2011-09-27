@@ -31,7 +31,7 @@ public class VirtualItemsHomeActivity extends CustomTitleActivity {
 		btnVCurrencies.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(VirtualItemsHomeActivity.this, NotImplementedActivity.class));
+				startActivity(new Intent(VirtualItemsHomeActivity.this, VirtualCurrenciesListActivity.class));
 			}
 		});
 	}

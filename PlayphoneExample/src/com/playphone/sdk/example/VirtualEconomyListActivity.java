@@ -31,7 +31,7 @@ public class VirtualEconomyListActivity extends CustomTitleActivity {
 		btnPlayphoneStore.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(VirtualEconomyListActivity.this, NotImplementedActivity.class));
+				startActivity(new Intent(VirtualEconomyListActivity.this, StoreHome.class));
 			}
 		});
 		

@@ -8,5 +8,8 @@
     <string name="user_inventory_description">Inventory can be tracked per user</string>
     <string name="get_virtual_items">Get Virtual Items</string>
     <string name="get_virtual_currencies">Get Virtual Currencies</string>
+    <string name="get_vshop_categories_list">VShop Categories List</string>
+    <string name="get_vshop_packs_list">VShop Packs List</string>
+    <string name="get_buy_vshop_packs">Buy VShop Packs</string>
     
 </resources>

@@ -46,6 +46,18 @@
               android:configChanges="orientation|keyboard|keyboardHidden"/>
         <activity android:theme="@style/CustomTheme" android:name=".VirtualItemsDetailsActivity"
               android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VirtualCurrenciesListActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VirtualCurrenciesDetailsActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".StoreHome"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VShopCategoriesListActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VShopPacksListActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
+        <activity android:theme="@style/CustomTheme" android:name=".VirtualPackDetailsActivity"
+              android:configChanges="orientation|keyboard|keyboardHidden"/>
         <receiver android:name="com.playphone.multinet.core.MNInstallReferrerReceiver"
           android:exported="true">
     		<intent-filter>

@@ -8,9 +8,9 @@ import java.net.URLConnection;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,8 +19,7 @@ import android.widget.TextView;
 import com.playphone.multinet.MNDirect;
 import com.playphone.multinet.providers.MNVItemsProvider.GameVItemInfo;
 
-public class VirtualItemsDetailsActivity extends CustomTitleActivity {
-	
+public class VirtualCurrenciesDetailsActivity extends CustomTitleActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,7 +27,15 @@ public class VirtualItemsDetailsActivity extends CustomTitleActivity {
 		
 		// set the breadcrumbs text
 		TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
-		txtBreadCrumbs.setText("Home > Virtual Economy > VItem > Item List > Details");
+		txtBreadCrumbs.setText("Home > Virtual Economy > VCurrencies > VCurrencies List > Details");
+		
+		// hide the unique flag, Virtual Currency does not use this
+		CheckBox chkUnique = (CheckBox) findViewById(R.id.ckUnique);
+		chkUnique.setVisibility(View.GONE);
+				
+		// hide the consumable flag, Virtual Currency does not use this
+		CheckBox chkConsumable = (CheckBox) findViewById(R.id.ckConsumable);
+		chkConsumable.setVisibility(View.GONE);
 		
 		int itemID = getIntent().getIntExtra("itemID", -1);
 		Log.d("playphone","Trying to find item with ID: " + itemID);
@@ -45,14 +52,6 @@ public class VirtualItemsDetailsActivity extends CustomTitleActivity {
 		TextView txtItemName = (TextView) findViewById(R.id.txtItemName);
 		txtItemName.setText(item.name);
 		
-		// set the unique flag
-		CheckBox chkUnique = (CheckBox) findViewById(R.id.ckUnique);
-		chkUnique.setChecked((item.model & 2) != 0);
-		
-		// set the consumable flag
-		CheckBox chkConsumable = (CheckBox) findViewById(R.id.ckConsumable);
-		chkConsumable.setChecked((item.model & 4) != 0);
-				
 		// set the allowed from client flag
 		CheckBox chkAllowedFromClient = (CheckBox) findViewById(R.id.ckAllowedFromClient);
 		chkAllowedFromClient.setChecked((item.model & 512) != 0);
@@ -92,5 +91,6 @@ public class VirtualItemsDetailsActivity extends CustomTitleActivity {
        } 
        return bm; 
 	}
+
 
 }
