@@ -4,5 +4,5 @@
 		android:layout_width="match_parent" 
 		android:layout_height="match_parent"
 		android:orientation="vertical">
-    <TextView android:singleLine="false" android:textAppearance="?android:attr/textAppearanceSmall" android:text="Home > Virtual Economy > VItems > \n Item List" android:layout_height="wrap_content" android:layout_width="match_parent"></TextView>
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
 </LinearLayout>

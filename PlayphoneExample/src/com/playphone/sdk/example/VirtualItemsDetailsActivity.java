@@ -26,6 +26,10 @@ public class VirtualItemsDetailsActivity extends CustomTitleActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.virtual_item_details);
 		
+		// set the breadcrumbs text
+		TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+		txtBreadCrumbs.setText("Home > Virtual Economy > VItem > Item List > Details");
+		
 		int itemID = getIntent().getIntExtra("itemID", -1);
 		Log.d("playphone","Trying to find item with ID: " + itemID);
 		GameVItemInfo item = MNDirect.getVItemsProvider().findGameVItemById(itemID);

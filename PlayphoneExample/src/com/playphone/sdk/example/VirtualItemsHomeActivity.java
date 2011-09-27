@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class VirtualItemsHomeActivity extends CustomTitleActivity {
 	
@@ -13,6 +14,9 @@ public class VirtualItemsHomeActivity extends CustomTitleActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.virtual_items_home);
 	
+		// set the breadcrumbs text
+		TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+		txtBreadCrumbs.setText("Home > Virtual Economy > VItem");
 		
 		Button btnVItems = (Button) findViewById(R.id.btnVItems);
 		btnVItems.setOnClickListener(new OnClickListener() {

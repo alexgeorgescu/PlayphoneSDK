@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class VirtualItemsListActivity extends CustomTitleActivity {
 	
@@ -26,6 +27,11 @@ public class VirtualItemsListActivity extends CustomTitleActivity {
 			Log.d("playphone","Updating the items...");
 			MNDirect.getVItemsProvider().doGameVItemsListUpdate();
 		}
+		
+		// set the breadcrumbs text
+		TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+		txtBreadCrumbs.setText("Home > Virtual Economy > VItem > Item List");
+				
 		
 		List<GameVItemInfo> virtualItems = Arrays.asList(MNDirect.getVItemsProvider().getGameVItemsList());
 		LinearLayout layout = (LinearLayout) findViewById(R.id.virtualItemListLayout);

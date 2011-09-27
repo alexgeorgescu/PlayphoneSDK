@@ -4,7 +4,7 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-    <TextView android:id="@+id/txtBreadCrumbs" android:textAppearance="?android:attr/textAppearanceSmall" android:text="Home > Virtual Economy > VItem > Item List > Details" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentLeft="true"></TextView>
+    <TextView android:id="@+id/txtBreadCrumbs" android:textAppearance="?android:attr/textAppearanceSmall" android:text="Breadcrumbs" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentLeft="true"></TextView>
     <ImageView
     android:id="@+id/divider"
     android:src="@android:drawable/divider_horizontal_dark"
@@ -13,7 +13,7 @@
     android:scaleType="fitXY"
     android:paddingLeft="0dip"
     android:paddingRight="0dip"
-    android:paddingBottom="1dip"
+    android:paddingBottom="5dip"
     android:paddingTop="1dip" 
     android:layout_below="@id/txtBreadCrumbs" />
 </LinearLayout>
