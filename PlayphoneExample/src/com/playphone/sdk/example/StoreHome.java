@@ -40,7 +40,7 @@ public class StoreHome extends CustomTitleActivity {
 		btnBuyVShopPacks.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(StoreHome.this, VirtualCurrenciesListActivity.class));
+				startActivity(new Intent(StoreHome.this, BuyVShopPacksActivity.class));
 			}
 		});
 	}
