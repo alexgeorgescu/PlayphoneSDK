@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <LinearLayout
+        android:id="@+id/layoutActivate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/incBreadCrumbs">
+        <Button android:id="@+id/btnActivate" android:text="Activate" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_weight="1"></Button>
+        <Button android:id="@+id/btnDeactivate" android:text="Deactivate" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="1"></Button>
+    </LinearLayout>
+    <TextView android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/txtCurrentStatus" android:text="Current Status" android:layout_width="match_parent" android:layout_below="@id/layoutActivate"></TextView>
+    <Button android:enabled="false" android:id="@+id/btnWelcome" android:text="Welcome" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtCurrentStatus" android:layout_marginTop="30dip"></Button>
+    <Button android:enabled="false" android:id="@+id/btnHighScore" android:text="High Score" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnWelcome" android:layout_marginTop="30dip"></Button>
+    <Button android:enabled="false" android:id="@+id/btnAchievement" android:text="Achivement" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnHighScore" android:layout_marginTop="30dip"></Button>
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <Button android:id="@+id/btnLoginScreen" android:text="Login Screen" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnLeaderboards" android:text="Leaderboards" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnLoginScreen" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnAchievements" android:text="Achievements" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnLeaderboards" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnStore" android:text="Store" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnAchievements" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnHome" android:text="Home" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnStore" android:layout_marginTop="30dip"></Button>
+</RelativeLayout>

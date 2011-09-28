@@ -11,5 +11,10 @@
     <string name="get_vshop_categories_list">VShop Categories List</string>
     <string name="get_vshop_packs_list">VShop Packs List</string>
     <string name="get_buy_vshop_packs">Buy VShop Packs</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="hide_launcher_icon">Hide Launcher Icon</string>
+    <string name="show_launcher_icon">Show Launcher Icon</string>
+    <string name="show_dashboard">Show Dashboard</string>
     
 </resources>

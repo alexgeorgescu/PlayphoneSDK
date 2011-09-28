@@ -1,6 +1,8 @@
 package com.playphone.sdk.example;
 
 
+import java.util.List;
+
 import com.playphone.multinet.*;
 import com.playphone.multinet.core.MNSession;
 
@@ -27,7 +29,7 @@ public class MainActivity extends ListActivity {
 	private int _GAMEID = MyPlayphoneCredentials._GAMEID;
 	private String _APISECRET = MyPlayphoneCredentials._APISECRET;
 	private static MNEventHandler eventHandler = null;
-	
+	private String TAB = "       ";
 	
 	public static MNEventHandler getMNEventHandler(){return eventHandler;}
 	
@@ -38,6 +40,71 @@ public class MainActivity extends ListActivity {
 
 	protected Entry[] getEntries() {
 		return new Entry[] {
+				new Entry() {
+					@Override public String toString() { return "1. Required Integration"; }
+					@Override public void run()        { }
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Login User"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, LoginUserActivity.class));}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Dashboard"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, DashboardPageActivity.class));}
+				},
+				new Entry() {
+                    @Override public String toString() { return TAB + "Virtual Economy"; }
+                    @Override public void run() 	{ startActivity(new Intent(MainActivity.this, VirtualEconomyListActivity.class));}
+                },
+                new Entry() {
+					@Override public String toString() { return "2. Advanced Features"; }
+					@Override public void run()        { }
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Current User Info"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, CurrentUserInfoActivity.class));}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Leaderboards"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostScoreActivity.class));	}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Achievements"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostAchievementActivity.class));}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Social Graph"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, SocialGraphActivity.class));}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Dashboard Control"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, DashboardControlActivity.class));	}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Notifications"; }
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, NotificationPanelActivity.class));	}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Cloud Storage"; }
+					@Override public void run()        { { startActivity(new Intent(MainActivity.this, PostCloudStorageActivity.class)); }
+														}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Settings"; }
+					@Override public void run()        { MNDirect.execAppCommand("jumpToBuddyList",null); 
+														MNDirectUIHelper.showDashboard();
+														}
+				},
+				new Entry() {
+					@Override public String toString() { return TAB + "Multiplayer Basics"; }
+					@Override public void run()        { 
+						//startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
+						MNDirect.execAppCommand("jumpToUserHome",null);
+						MNDirectUIHelper.showDashboard();
+						Toast.makeText(MainActivity.this, "Click \"Play Now\" to join a multiplayer room and send messages", Toast.LENGTH_LONG).show();}
+														
+				}
+				/*
 				new Entry() {
 					@Override public String toString() { return "Dashboard"; }
 					@Override public void run()        { MNDirect.execAppCommand("jumpToUserProfile",null);
@@ -93,7 +160,7 @@ public class MainActivity extends ListActivity {
                 new Entry() {
                     @Override public String toString() { return "MultiPlayer Basics"; }
                     @Override public void run() 	{ 
-                    									/*startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));*/
+                    									//startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
                     									MNDirect.execAppCommand("jumpToUserHome",null);
                     									MNDirectUIHelper.showDashboard();
 														Toast.makeText(MainActivity.this, "Click \"Play Now\" to join a multiplayer room and send messages", Toast.LENGTH_LONG).show();}
@@ -101,7 +168,7 @@ public class MainActivity extends ListActivity {
 				new Entry() {
 					@Override public String toString() { return "Logout from Playphone"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, LogoutActivity.class));}
-				}
+				}*/
 		};
 	}
 
@@ -195,6 +262,35 @@ public class MainActivity extends ListActivity {
 				handler.sendMessage(msg);
 			}
 			Log.d("playphone","The new status is " + newStatus);
+			
+			//notify the login activity if it is the top activity
+			//detectActivityOnTop(LoginUserActivity.class.getCanonicalName());
+			/*
+			Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			Bundle bundle = new Bundle();
+			bundle.putInt("loginStatus", newStatus);
+			intent.putExtras(bundle);
+			startActivity(intent);
+			*/
 		}
+		
+		
 	}
+    
+    
+    private boolean detectActivityOnTop(String classname){
+		Log.d("playphone","Check for classname: " + classname);
+    	// get a list of running processes and iterate through them
+	    ActivityManager am = (ActivityManager) this
+	                .getSystemService(ACTIVITY_SERVICE);
+	 
+	    // get the info from the currently running task
+	        List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+	 
+	        Log.d("playphone", "CURRENT Activity :"
+	                + taskInfo.get(0).topActivity.getClassName());
+	        return false;
+
+    }
 }

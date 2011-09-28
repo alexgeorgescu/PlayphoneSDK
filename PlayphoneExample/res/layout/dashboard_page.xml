@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <Button android:id="@+id/btnShowLauncher" android:text="@string/show_launcher_icon" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="30dip"></Button>
+    <TextView android:id="@+id/txtDashboardInfo" android:textAppearance="?android:attr/textAppearanceSmall" android:text="*** Click on the P button to launch the dashboard ***" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnShowLauncher"></TextView>
+    <Button android:id="@+id/btnHideLauncher" android:text="@string/hide_launcher_icon" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtDashboardInfo" android:layout_marginTop="30dip"></Button>
+	<ImageView
+    android:id="@+id/divider"
+    android:src="@android:drawable/divider_horizontal_dark"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitXY"
+    android:paddingLeft="0dip"
+    android:paddingRight="0dip"
+    android:paddingBottom="5dip"
+    android:paddingTop="1dip" 
+    android:layout_below="@id/btnHideLauncher" />
+    <TextView android:id="@+id/txtDashboardControl" android:textAppearance="?android:attr/textAppearanceSmall" android:text="Dashboard Control" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/divider"></TextView>
+    <Button android:id="@+id/btnShowDashboard" android:text="@string/show_dashboard" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtDashboardControl" android:layout_marginTop="30dip"></Button>
+	
+    
+</RelativeLayout>

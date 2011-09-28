@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/txtPlayerName" android:text="Player Name" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@id/incBreadCrumbs" android:layout_alignParentLeft="true" android:layout_alignParentRight="true"></TextView>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/txtPlayerStatus" android:text="Player Status" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@id/txtPlayerName" android:layout_alignParentLeft="true" android:layout_alignParentRight="true"></TextView>
+    <Button android:id="@+id/btnLogIn" android:text="@string/login" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtPlayerStatus" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnLogOut" android:text="@string/logout" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnLogIn" android:layout_marginTop="30dip"></Button>
+</RelativeLayout>
