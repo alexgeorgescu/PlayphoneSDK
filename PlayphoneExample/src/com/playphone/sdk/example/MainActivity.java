@@ -86,14 +86,11 @@ public class MainActivity extends ListActivity {
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Cloud Storage"; }
-					@Override public void run()        { { startActivity(new Intent(MainActivity.this, PostCloudStorageActivity.class)); }
-														}
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostCloudStorageActivity.class));}
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Settings"; }
-					@Override public void run()        { MNDirect.execAppCommand("jumpToBuddyList",null); 
-														MNDirectUIHelper.showDashboard();
-														}
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, NotImplementedActivity.class));}
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Multiplayer Basics"; }
