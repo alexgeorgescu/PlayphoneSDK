@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <Button android:id="@+id/btnInventoryList" android:text="@string/inventory_list" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="30dip"></Button>
+    <Button android:id="@+id/btnManageInventory" android:text="@string/manage_inventory" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnInventoryList" android:layout_marginTop="30dip"></Button>
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+		android:id="@+id/layoutDashboardList"
+		android:layout_width="match_parent" 
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+	<LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="10dip">
+		    <TextView android:gravity="center" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:id="@+id/txtLeaderboardName" android:text="Name" android:layout_height="match_parent" android:layout_weight="0.36"></TextView>
+    		<Button android:text="Update score" android:layout_height="wrap_content" android:id="@+id/btnUpdateScore" android:layout_weight="1" android:layout_width="0dp"></Button>
+    </LinearLayout>
+	<LinearLayout android:id="@+id/layoutLeaderboards" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" ></LinearLayout>
+</LinearLayout>

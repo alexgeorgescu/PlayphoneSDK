@@ -16,5 +16,7 @@
     <string name="hide_launcher_icon">Hide Launcher Icon</string>
     <string name="show_launcher_icon">Show Launcher Icon</string>
     <string name="show_dashboard">Show Dashboard</string>
+    <string name="inventory_list">Inventory List</string>
+    <string name="manage_inventory">Manage Inventory</string>
     
 </resources>

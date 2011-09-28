@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+		android:id="@+id/layoutDashboardList"
+		android:layout_width="match_parent" 
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+	<LinearLayout android:id="@+id/layoutLeaderboards" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" ></LinearLayout>
+</LinearLayout>

@@ -66,7 +66,7 @@ public class MainActivity extends ListActivity {
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Leaderboards"; }
-					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostScoreActivity.class));	}
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, LeaderboardHome.class));	}
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Achievements"; }

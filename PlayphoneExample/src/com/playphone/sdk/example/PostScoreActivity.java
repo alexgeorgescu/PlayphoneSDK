@@ -25,6 +25,11 @@ public class PostScoreActivity extends CustomTitleActivity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_score);
         
+        // set the breadcrumbs text
+     	TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+     	txtBreadCrumbs.setText("Home > Leaderboards > Details > Update");
+     		
+        
         Button btnUpload = (Button) findViewById(R.id.btnUpload);
         btnUpload.setOnClickListener(this);
         
@@ -45,14 +50,6 @@ public class PostScoreActivity extends CustomTitleActivity implements OnClickLis
             }
         });
         
-        Button btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
         
     }
     

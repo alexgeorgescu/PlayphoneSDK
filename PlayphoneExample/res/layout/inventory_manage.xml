@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+	<LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/incBreadCrumbs" android:layout_alignParentLeft="true" android:layout_marginTop="0dip">
+		    <TextView android:gravity="center" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:id="@+id/textView1" android:text="Items" android:layout_height="match_parent"></TextView>
+    		<Spinner android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/spinner1" android:layout_weight="1"></Spinner>
+    </LinearLayout>
+	<LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/linearLayout1" android:layout_alignParentLeft="true" android:layout_marginTop="10dip">
+		    <TextView android:gravity="center" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:id="@+id/textView1" android:text="Current Amount" android:layout_height="match_parent" android:layout_weight="0.26"></TextView>
+		    <TextView android:gravity="center" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:id="@+id/textView1" android:text="200" android:layout_height="match_parent" android:layout_weight="0.36"></TextView>
+    </LinearLayout>
+	<LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/linearLayout2" android:layout_alignParentLeft="true" android:layout_marginTop="10dip">
+		    <EditText android:layout_height="wrap_content" android:id="@+id/editText1" android:inputType="number" android:layout_weight="1" android:layout_width="0dp" android:hint="Enter number">
+    		</EditText>
+    		<Button android:text="Add" android:layout_height="wrap_content" android:id="@+id/btnAdd" android:layout_weight="1" android:layout_width="0dp"></Button>
+    </LinearLayout>
+	<LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/linearLayout3" android:layout_alignParentLeft="true" android:layout_marginTop="10dip">
+		    <EditText android:layout_height="wrap_content" android:id="@+id/editText1" android:inputType="number" android:layout_weight="1" android:layout_width="0dp" android:hint="Enter number">
+    		</EditText>
+    		<Button android:text="Substract" android:layout_height="wrap_content" android:id="@+id/btnSubstract" android:layout_weight="1" android:layout_width="0dp"></Button>
+    </LinearLayout>
+</RelativeLayout>

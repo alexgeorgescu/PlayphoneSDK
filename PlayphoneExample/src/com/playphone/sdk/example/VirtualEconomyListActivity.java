@@ -39,7 +39,7 @@ public class VirtualEconomyListActivity extends CustomTitleActivity {
 		btnInventory.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(VirtualEconomyListActivity.this, NotImplementedActivity.class));
+				startActivity(new Intent(VirtualEconomyListActivity.this, InventoryHomeActivity.class));
 			}
 		});
 		

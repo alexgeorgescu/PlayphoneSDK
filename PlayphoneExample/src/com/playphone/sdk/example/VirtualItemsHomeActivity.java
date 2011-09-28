@@ -1,7 +1,10 @@
 package com.playphone.sdk.example;
 
+import com.playphone.multinet.MNDirectUIHelper;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,6 +37,13 @@ public class VirtualItemsHomeActivity extends CustomTitleActivity {
 				startActivity(new Intent(VirtualItemsHomeActivity.this, VirtualCurrenciesListActivity.class));
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		Log.d("playphone","VirtualItemsHome onResume() called");
+		super.onResume();
+		MNDirectUIHelper.setHostActivity(this);
 	}
 
 }

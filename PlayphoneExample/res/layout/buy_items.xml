@@ -5,6 +5,6 @@
         <Button android:text="Get one free Health Potion!" android:layout_weight="1" android:id="@+id/btnGetFreePotion" android:layout_height="0dp" android:layout_width="match_parent"></Button>
         <Button android:text="Buy more Health Potions!" android:layout_width="match_parent" android:id="@+id/btnBuy" android:layout_weight="1" android:layout_height="0dp"></Button>
         <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/txtResult" android:layout_height="0dp" android:layout_width="match_parent" android:layout_weight="1"></TextView>
-        <Button android:text="Back to Main" android:layout_height="0dp" android:layout_width="match_parent" android:id="@+id/btnBack" android:layout_weight="1"></Button>
+        <Button android:text="Back to Virtual Economy Home" android:layout_height="0dp" android:layout_width="match_parent" android:id="@+id/btnBack" android:layout_weight="1"></Button>
     </LinearLayout>
     

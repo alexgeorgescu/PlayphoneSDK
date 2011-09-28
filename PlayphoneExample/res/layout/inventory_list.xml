@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginTop="10dip" android:id="@+id/txtCurrencies" android:text="Currencies" android:layout_height="wrap_content" android:layout_below="@id/incBreadCrumbs" android:layout_width="wrap_content"></TextView>
+    <LinearLayout android:orientation="vertical" android:id="@+id/layoutCurrencies" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtCurrencies" android:layout_alignParentLeft="true" android:layout_marginTop="30dp"/>
+	<TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_marginTop="30dp" android:id="@+id/txtItems" android:text="Items" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@id/layoutCurrencies"></TextView>
+	<LinearLayout android:orientation="vertical" android:id="@+id/layoutItems" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/txtItems" android:layout_alignParentLeft="true" android:layout_marginTop="30dp"></LinearLayout>
+</RelativeLayout>
