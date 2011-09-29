@@ -14,5 +14,6 @@
 <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="match_parent" android:orientation="vertical">
 	<Button android:layout_width="match_parent" android:text="Buy" android:layout_height="wrap_content" android:id="@+id/btnBuy"></Button>
 </LinearLayout>
+<TextView android:gravity="center" android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="Warning: This will actually charge the device depending on the purchase method selected!" android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
 </LinearLayout>
 
