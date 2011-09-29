@@ -14,18 +14,22 @@ import com.playphone.multinet.core.MNJoinRoomInvitationParams;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class LoginUserActivity extends CustomTitleActivity {
+public class LoginUserActivity extends CustomTitleActivity implements Callback {
 	
 	private Button btnLogIn;
 	private Button btnLogOut;
 	private TextView txtPlayerStatus;
 	private TextView txtPlayerName;
+	Handler handler = new Handler(this);
 	
 	
 	
@@ -67,6 +71,8 @@ public class LoginUserActivity extends CustomTitleActivity {
 		updatePlayerStatus(-1);
 		
 		//MNDirect.getSession().addEventHandler(this);
+		// add the callback to the mainactivity
+		MainActivity.getMNEventHandler().setHandler(handler);
 	}
 
 	@Override
@@ -104,6 +110,13 @@ public class LoginUserActivity extends CustomTitleActivity {
 			btnLogIn.setEnabled(true);
 			txtPlayerName.setText("0    null");
 		}
+	}
+
+	@Override
+	public boolean handleMessage(Message msg) {
+		if(msg.getData().containsKey("statusChange"))
+			updatePlayerStatus(msg.getData().getInt("statusChange"));
+		return false;
 	}
 	
 	
