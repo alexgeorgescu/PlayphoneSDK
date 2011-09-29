@@ -80,18 +80,19 @@ public class MainActivity extends ListActivity {
 					@Override public String toString() { return TAB + "Dashboard Control"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, DashboardControlActivity.class));	}
 				},
-				new Entry() {
+				/*new Entry() {
 					@Override public String toString() { return TAB + "Notifications"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, NotificationPanelActivity.class));	}
-				},
+				},*/
 				new Entry() {
 					@Override public String toString() { return TAB + "Cloud Storage"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostCloudStorageActivity.class));}
 				},
+				/*
 				new Entry() {
 					@Override public String toString() { return TAB + "Settings"; }
 					@Override public void run()        { startActivity(new Intent(MainActivity.this, NotImplementedActivity.class));}
-				},
+				},*/
 				new Entry() {
 					@Override public String toString() { return TAB + "Multiplayer Basics"; }
 					@Override public void run()        { 

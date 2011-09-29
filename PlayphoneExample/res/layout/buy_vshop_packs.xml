@@ -7,8 +7,12 @@
 		android:orientation="vertical">
     <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
 </LinearLayout>
+<LinearLayout android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="match_parent">
+    <TextView android:gravity="center" android:id="@+id/textView1" android:layout_height="match_parent" android:text="VShop Packs" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_weight=".5" android:layout_width="0dp"></TextView>
+    <Spinner android:layout_height="match_parent" android:id="@+id/spinner" android:layout_weight="1" android:layout_width="0dp"></Spinner>
+</LinearLayout>
 <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="match_parent" android:orientation="vertical">
-	<Button android:layout_width="wrap_content" android:text="Buy" android:layout_height="wrap_content" android:id="@+id/btnBuy"></Button>
+	<Button android:layout_width="match_parent" android:text="Buy" android:layout_height="wrap_content" android:id="@+id/btnBuy"></Button>
 </LinearLayout>
 </LinearLayout>
 

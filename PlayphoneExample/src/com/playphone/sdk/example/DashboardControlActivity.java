@@ -49,6 +49,7 @@ public class DashboardControlActivity extends CustomTitleActivity {
 		});
 
 
+		/*
 		Button btnStore = (Button) findViewById(R.id.btnStore);
 		btnStore.setOnClickListener(new OnClickListener() {
 			@Override
@@ -57,6 +58,7 @@ public class DashboardControlActivity extends CustomTitleActivity {
 				MNDirectUIHelper.showDashboard();
 			}
 		});
+		*/
 
 		Button btnHome = (Button) findViewById(R.id.btnHome);
 		btnHome.setOnClickListener(new OnClickListener() {

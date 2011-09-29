@@ -43,6 +43,11 @@ public class PostCloudStorageActivity extends CustomTitleActivity implements OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_cloudstorage);
         
+        // set the breadcrumbs text
+     	TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+     	txtBreadCrumbs.setText("Home > Cloud Storage");
+     		
+        
         Button btnUpload = (Button) findViewById(R.id.btnWrite);
         btnUpload.setOnClickListener(this);
         
@@ -62,15 +67,6 @@ public class PostCloudStorageActivity extends CustomTitleActivity implements OnC
                 }
             }
         });
-        
-        Button btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
         
         MNDirect.getGameCookiesProvider().addEventHandler(new IEventHandler() {
 			

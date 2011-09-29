@@ -4,6 +4,6 @@
     <Button android:id="@+id/btnLoginScreen" android:text="Login Screen" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_alignParentTop="true" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="30dip"></Button>
     <Button android:id="@+id/btnLeaderboards" android:text="Leaderboards" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnLoginScreen" android:layout_marginTop="30dip"></Button>
     <Button android:id="@+id/btnAchievements" android:text="Achievements" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnLeaderboards" android:layout_marginTop="30dip"></Button>
-    <Button android:id="@+id/btnStore" android:text="Store" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnAchievements" android:layout_marginTop="30dip"></Button>
+    <Button android:visibility="gone" android:id="@+id/btnStore" android:text="Store" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnAchievements" android:layout_marginTop="30dip"></Button>
     <Button android:id="@+id/btnHome" android:text="Home" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_below="@id/btnStore" android:layout_marginTop="30dip"></Button>
 </RelativeLayout>
