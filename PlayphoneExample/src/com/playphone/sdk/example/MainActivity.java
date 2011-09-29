@@ -70,7 +70,7 @@ public class MainActivity extends ListActivity {
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Achievements"; }
-					@Override public void run()        { startActivity(new Intent(MainActivity.this, PostAchievementActivity.class));}
+					@Override public void run()        { startActivity(new Intent(MainActivity.this, AchievementsHomeActivity.class));}
 				},
 				new Entry() {
 					@Override public String toString() { return TAB + "Social Graph"; }

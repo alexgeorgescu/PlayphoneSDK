@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+		android:id="@+id/layoutDashboardList"
+		android:layout_width="match_parent" 
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+    <include layout="@layout/breadcrumbs" android:layout_width="match_parent" android:id="@+id/incBreadCrumbs" android:layout_height="wrap_content" android:layout_alignParentTop="true"></include>
+	<Button android:text="Unlock achievement" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/btnUnlockAchievement" android:layout_below="@id/incBreadCrumbs" android:layout_marginTop="10dip"></Button>
+	<TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="match_parent" android:id="@+id/txtAchievementsList" android:text="Achievements List" android:layout_height="wrap_content" android:layout_below="@id/btnUnlockAchievement" android:layout_marginTop="10dip"></TextView>
+	<LinearLayout android:id="@+id/layoutAchievements" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:layout_below="@id/txtAchievementsList" android:layout_marginTop="10dip" ></LinearLayout>
+</RelativeLayout>

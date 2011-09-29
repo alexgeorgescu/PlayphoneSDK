@@ -30,6 +30,11 @@ public class PostAchievementActivity extends CustomTitleActivity implements OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_achievement);
         
+        // set the breadcrumbs text
+     	TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+     	txtBreadCrumbs.setText("Home > Achievements > Unlock");
+     		
+        
         Button btnUpload = (Button) findViewById(R.id.btnUpload);
         btnUpload.setOnClickListener(this);
         
@@ -49,15 +54,6 @@ public class PostAchievementActivity extends CustomTitleActivity implements OnCl
                 }
             }
         });
-        
-        Button btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
         
     }
     

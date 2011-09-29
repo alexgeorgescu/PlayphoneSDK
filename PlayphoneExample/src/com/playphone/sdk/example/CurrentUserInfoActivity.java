@@ -19,6 +19,10 @@ public class CurrentUserInfoActivity extends CustomTitleActivity{
 		setContentView(R.layout.post_userinfo);
 		
 		
+		// set the breadcrumbs text
+     	TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
+     	txtBreadCrumbs.setText("Home > Current User Info");
+     	
 		TextView txtResult = (TextView) findViewById(R.id.txtResult);
 		StringBuffer str = new StringBuffer().
 				append("Username: ").append(MNDirect.getSession().getMyUserName()).append("\n").
@@ -26,14 +30,6 @@ public class CurrentUserInfoActivity extends CustomTitleActivity{
 				append("Current room: ").append(MNDirect.getSession().getCurrentRoomId());
 		txtResult.setText(str.toString());
 		
-		Button btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
 	}
 	
 	@Override
