@@ -19,27 +19,11 @@ public class CustomTitleActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-	}
-
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		MNDirectUIHelper.setHostActivity(null);
-	}
- 
-	@Override
-	protected void onResume() {
-		Log.d("playphone","CustomTitle onResume() called");
-		super.onResume();
-		MNDirectUIHelper.setHostActivity(this);
-		
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 		
 		Button btnHome = (Button) findViewById(R.id.btnHome);
@@ -55,6 +39,21 @@ public class CustomTitleActivity extends Activity{
 				startActivity(intent);
 			}
 		});
+
+	}
+
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MNDirectUIHelper.setHostActivity(null);
+	}
+ 
+	@Override
+	protected void onResume() {
+		Log.d("playphone","CustomTitle onResume() called");
+		MNDirectUIHelper.setHostActivity(this);
+		super.onResume();
 	}
 
 	

@@ -2,7 +2,9 @@ package com.playphone.sdk.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +31,7 @@ public class SocialGraphActivity extends CustomTitleActivity implements Callback
 	
 	LinearLayout layout;
 	Handler handler = new Handler(this);
-	
+	Map<String,MNWSBuddyListItem> buddies = new HashMap<String,MNWSBuddyListItem>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,8 +81,12 @@ public class SocialGraphActivity extends CustomTitleActivity implements Callback
 				@Override
 				public void onClick(View v) {
 					//generate the intent for the friend details and pass in the item id
-					Intent intent = new Intent(SocialGraphActivity.this,NotImplementedActivity.class);
-					intent.putExtra("friendID", currentFriend);
+					Intent intent = new Intent(SocialGraphActivity.this,SocialGraphDetailActivity.class);
+					intent.putExtra("social", "yes");
+					intent.putExtra("username", currentFriend);
+					intent.putExtra("userid",buddies.get(currentFriend).getFriendUserId());
+					intent.putExtra("locale",buddies.get(currentFriend).getFriendUserLocale());
+					intent.putExtra("online",buddies.get(currentFriend).getFriendUserOnlineNow());
 					startActivity(intent);
 				}
 			});
@@ -114,9 +120,11 @@ public class SocialGraphActivity extends CustomTitleActivity implements Callback
 	    ArrayList<String> users = new ArrayList<String>();
 	    
 	    // Iterate over the returned list and print the name of each friend
+	    buddies.clear();
 	    for (MNWSBuddyListItem friend : friends)
 	     {
 	    	users.add(friend.getFriendUserNickName());
+	    	buddies.put(friend.getFriendUserNickName(),friend);
 	     }
 	    
 	    Message msg = Message.obtain();
