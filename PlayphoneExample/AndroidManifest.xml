@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	android:installLocation="auto" package="com.playphone.sdk.example"
-	android:versionCode="1" android:versionName="1.0">
+	android:versionCode="2" android:versionName="1.1">
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
@@ -76,7 +76,7 @@
 		<activity android:theme="@style/CustomTheme" android:name=".InventoryListActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden" />
 		<activity android:theme="@style/CustomTheme" android:name=".InventoryManageActivity"
-			android:configChanges="orientation|keyboard|keyboardHidden" />
+			android:configChanges="orientation|keyboard|keyboardHidden" android:windowSoftInputMode="stateHidden"/>
 		<activity android:theme="@style/CustomTheme" android:name=".LeaderboardHome"
 			android:configChanges="orientation|keyboard|keyboardHidden" />
 		<activity android:theme="@style/CustomTheme" android:name=".LeaderboardsDetailsActivity"
