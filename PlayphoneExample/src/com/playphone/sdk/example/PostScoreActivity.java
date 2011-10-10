@@ -69,10 +69,13 @@ public class PostScoreActivity extends CustomTitleActivity implements OnClickLis
 
 	@Override
 	public void onClick(View arg0) {
+		try{
 		editInput.clearFocus();
 		MNDirect.postGameScore(Long.valueOf(editInput.getText().toString()));
 		txtResult.setText("Updated your score of " + editInput.getText().toString() + " on the Leaderboards");
-		
+		}catch (Exception e) {
+			return;
+		}
 	}
 
 }
