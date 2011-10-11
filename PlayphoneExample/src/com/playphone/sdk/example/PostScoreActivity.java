@@ -73,7 +73,8 @@ public class PostScoreActivity extends CustomTitleActivity implements OnClickLis
 		editInput.clearFocus();
 		MNDirect.postGameScore(Long.valueOf(editInput.getText().toString()));
 		txtResult.setText("Updated your score of " + editInput.getText().toString() + " on the Leaderboards");
-		}catch (Exception e) {
+		}catch (NumberFormatException e) {
+			//ignore if the value is not a long
 			return;
 		}
 	}

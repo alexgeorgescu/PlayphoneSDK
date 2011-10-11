@@ -18,5 +18,5 @@
     <string name="show_dashboard">Show Dashboard</string>
     <string name="inventory_list">Inventory List</string>
     <string name="manage_inventory">Manage Inventory</string>
-    
+    <string name="crash_toast_text">Oops! Playphone SDK demo has crashed, but a crash report has been sent to the developers to help them fix the issue!</string>
 </resources>
