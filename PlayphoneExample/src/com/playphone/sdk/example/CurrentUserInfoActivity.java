@@ -23,11 +23,22 @@ public class CurrentUserInfoActivity extends CustomTitleActivity{
      	TextView txtBreadCrumbs = (TextView) findViewById(R.id.txtBreadCrumbs);
      	txtBreadCrumbs.setText("Home > Current User Info");
      	
-		TextView txtResult = (TextView) findViewById(R.id.txtResult);
-		StringBuffer str = new StringBuffer().
-				append("Username: ").append(MNDirect.getSession().getMyUserName()).append("\n").
-				append("User id: ").append(MNDirect.getSession().getMyUserId()).append("\n").
-				append("Current room: ").append(MNDirect.getSession().getCurrentRoomId());
+     	TextView txtResult = (TextView) findViewById(R.id.txtResult);
+     	StringBuffer str = new StringBuffer();
+     	if(MNDirect.isUserLoggedIn())
+		{
+     	str.
+			append("Username: ").append(MNDirect.getSession().getMyUserName()).append("\n").
+			append("User id: ").append(MNDirect.getSession().getMyUserId()).append("\n").
+			append("Current room: ").append(MNDirect.getSession().getCurrentRoomId());
+		}
+     	else
+     	{
+   		str.
+			append("Username: null\n").
+			append("User id: -1\n").
+			append("Current room: -1");
+     	}
 		txtResult.setText(str.toString());
 		
 	}
