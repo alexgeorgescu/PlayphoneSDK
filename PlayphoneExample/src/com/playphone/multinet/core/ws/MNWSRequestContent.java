@@ -9,6 +9,8 @@ package com.playphone.multinet.core.ws;
 
 import java.util.HashMap;
 
+import com.playphone.multinet.core.MNUtils;
+
 public class MNWSRequestContent
  {
   public static final int LEADERBOARD_PERIOD_ALL_TIME   = 0;
@@ -152,6 +154,13 @@ public class MNWSRequestContent
                          getPeriodNameByCode(period),
                            Integer.toString(gameId),
                             Integer.toString(gameSetId));
+   }
+
+  public String addAnyUserGameCookies (long[] userIdList, int[] cookieKeyList)
+   {
+    return addInfoBlock("anyUserGameCookies",
+                        MNUtils.stringMakeLongList(userIdList,"^"),
+                        MNUtils.stringMakeIntList(cookieKeyList,"^"));
    }
 
   protected String addCurrUserSubscriptionStatus (int socNetId)

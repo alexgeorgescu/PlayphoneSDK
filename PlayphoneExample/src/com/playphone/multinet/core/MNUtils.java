@@ -429,6 +429,30 @@ public final class MNUtils
     return true;
    }
 
+  public static String stringMakeIntList (int[] values, String joinString)
+   {
+    StringJoiner joiner = new StringJoiner(joinString);
+
+    for (int val : values)
+     {
+      joiner.join(Integer.toString(val));
+     }
+
+    return joiner.toString();
+   }
+
+  public static String stringMakeLongList (long[] values, String joinString)
+   {
+    StringJoiner joiner = new StringJoiner(joinString);
+
+    for (long val : values)
+     {
+      joiner.join(Long.toString(val));
+     }
+
+    return joiner.toString();
+   }
+
   public static class StringJoiner
    {
     public StringJoiner (String joinString)

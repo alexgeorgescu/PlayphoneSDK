@@ -10,14 +10,14 @@ package com.playphone.multinet;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -28,8 +28,27 @@ import com.playphone.multinet.core.MNSessionEventHandlerAbstract;
 import com.playphone.multinet.core.MNUserProfileView;
 
 public class MNDirectUIHelper {
+	// dashboard create flags
+	protected static boolean edgePopupDashboardFlag  = true;
+	protected static boolean fullScreenDashboardFlag = false; 
 	
 	protected static boolean showOnBind = false;
+	
+	/**
+	 * This is default 
+	 * Call before show Dashboard
+	 */
+	public static void setDashboardNewStyle() {
+		edgePopupDashboardFlag  = true; 
+		fullScreenDashboardFlag = false; 
+	}
+	/**
+	 * Call before show Dashboard
+	 */
+	public static void setDashboardOldStyle() {
+		edgePopupDashboardFlag  = false; 
+		fullScreenDashboardFlag = true; 
+	}
 	
 	public static interface IEventHandler {
 		public void onSetHostActivity(Activity newHostActivity);
@@ -184,7 +203,7 @@ public class MNDirectUIHelper {
 			}
 		}
 	}
-	
+
 	protected final static EventHandler eh = new EventHandler();
 	protected final static IMNUserProfileViewEventHandler viewEventHandler = new IMNUserProfileViewEventHandler() {
 		@Override
@@ -200,10 +219,10 @@ public class MNDirectUIHelper {
 			}
 		}
 	};
-	
-	protected synchronized static void bindDashboard (Activity a) {
+
+	protected synchronized static void bindDashboard(Activity a) {
 		final MNUserProfileView upv = MNDirect.getView();
-		final MNSession s = MNDirect.getSession(); 
+		final MNSession s = MNDirect.getSession();
 		if (a != null) {
 			dashboard = new Dashboard(a);
 			s.addEventHandler(eh);
@@ -222,9 +241,11 @@ public class MNDirectUIHelper {
 		}
 	}
 
-	protected static class Dashboard extends AlertDialog {
-		
-		public void restoreState () {
+	protected static class Dashboard extends Dialog {
+
+		static final int PADDING_SIZE = 10;
+
+		public void restoreState() {
 			if (showOnBind) {
 				dashboard.show();
 				onShowDashboard();
@@ -233,38 +254,62 @@ public class MNDirectUIHelper {
 				onHideDashboard();
 			}
 		}
-		
+
 		protected Dashboard(Context context) {
 			super(context);
 		}
 
+		protected WindowManager.LayoutParams getLayout(int padding) {
+			final Window w = getWindow();
+			final Display display = w.getWindowManager().getDefaultDisplay();
+			final float scale = getContext().getResources().getDisplayMetrics().density;
+			int Padding = (int) (padding * scale + 0.5f);
+			int wMax = (int) (display.getWidth());
+			int hMax = (int) (display.getHeight());
+			int wReal = (wMax - (2 * Padding));
+			int hReal = (hMax - (2 * Padding));
+
+			return new WindowManager.LayoutParams(wReal, hReal);
+		}
+
+		protected int getMNDashboardTheme() {
+			int resultThemeId = android.R.style.Theme_Dialog;
+			if (edgePopupDashboardFlag) {
+				resultThemeId = getContext().getResources().getIdentifier(
+						"Theme_Dashboard", "style",
+						getContext().getPackageName());
+			} else {
+				resultThemeId = getContext().getResources().getIdentifier(
+						"Theme_Dashboard_Fullscreen", "style",
+						getContext().getPackageName());
+			}
+
+			return resultThemeId;
+		}
+
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
-			final Window w = getWindow();
-			w.requestFeature(Window.FEATURE_NO_TITLE);
-			w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-	                WindowManager.LayoutParams.FLAG_FULLSCREEN );
-			
 			super.onCreate(savedInstanceState);
-			
-			w.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM); 
-			
+			getContext().setTheme(getMNDashboardTheme ());
+			final Window w = getWindow();
+			w.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
 			View contentView = MNDirect.getView();
-			
+
 			ViewGroup parentView = (ViewGroup) (contentView.getParent());
 
 			if (parentView != null) {
 				parentView.removeView(contentView);
 			}
-			
-			setContentView(contentView);
-			
-			w.setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-			
+
+			addContentView(contentView, getLayout(fullScreenDashboardFlag ? 0 : PADDING_SIZE));
+
+			w.setLayout(WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.FILL_PARENT);
+
 			setOnKeyListener(new OnKeyListener() {
 				@Override
-				public boolean onKey(DialogInterface paramDialogInterface, int paramInt,
-						KeyEvent paramKeyEvent) {
+				public boolean onKey(DialogInterface paramDialogInterface,
+						int paramInt, KeyEvent paramKeyEvent) {
 					if (paramKeyEvent.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 						hideDashboard();
 						return true;
@@ -272,7 +317,7 @@ public class MNDirectUIHelper {
 					return false;
 				}
 			});
-			
+
 			setOnDismissListener(new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
@@ -280,7 +325,7 @@ public class MNDirectUIHelper {
 					dashboard = null;
 				}
 			});
-			
+
 			setOnCancelListener(new OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {

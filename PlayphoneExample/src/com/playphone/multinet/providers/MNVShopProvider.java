@@ -29,6 +29,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import android.app.PendingIntent;
+
 /**
  * A class representing "Virtual shop" MultiNet provider.
  *
@@ -119,6 +121,7 @@ public class MNVShopProvider
     public static final int ERROR_CODE_XML_PARSE_ERROR     = -997;
     public static final int ERROR_CODE_XML_STRUCTURE_ERROR = -996;
     public static final int ERROR_CODE_NETWORK_ERROR       = -995;
+    public static final int ERROR_CODE_GENERIC             = -994;
    }
 
   /**
@@ -309,6 +312,20 @@ public class MNVShopProvider
    }
 
   /**
+   * An interface which is used to override default procedure of
+   * starting In-app Billing purchase activity
+   */
+  public interface IInAppBillingActivityManager
+   {
+    /**
+     * Starts In-app Billing purchase activity
+     * @param intent intent which can be used to launch checkout UI
+     * @return true if activity was started successfully and false - otherwise
+     */
+    public boolean startInAppBillingActivity (PendingIntent intent);
+   }
+
+  /**
    * Constructs a new <code>MNVShopProvider</code> object.
    *
    * @param session         MultiNet session instance
@@ -318,7 +335,9 @@ public class MNVShopProvider
     this.session        = session;
     this.vItemsProvider = vItemsProvider;
 
-    checkoutRequests = new RequestSet();
+    inAppBilling = new MNVShopInAppBilling(session,this);
+
+    requestHelper = new MNVShopWSRequestHelper(session,new RequestHelperEventHandler());
 
     eventHandlers = new MNEventHandlerArray<IEventHandler>();
 
@@ -333,7 +352,8 @@ public class MNVShopProvider
    */
   public void shutdown ()
    {
-    checkoutRequests.cancelAll();
+    inAppBilling.shutdown();
+    requestHelper.shutdown();
     session.getGameVocabulary().removeEventHandler(gameVocabularyEventHandler);
     sessionEventHandler.shutdown();
    }
@@ -652,37 +672,15 @@ public class MNVShopProvider
 
     if (webServerUrl != null)
      {
-      String userSid = session.getMySId();
+      MNUtils.HttpPostBodyStringBuilder postBodyBuilder = new MNUtils.HttpPostBodyStringBuilder();
 
-      if (userSid != null)
-       {
-        MNUtils.HttpPostBodyStringBuilder postBodyBuilder = new MNUtils.HttpPostBodyStringBuilder();
+      postBodyBuilder.addParam("proc_pack_id",joinIntegers(packIdArray));
+      postBodyBuilder.addParam("proc_pack_count",joinIntegers(packCountArray));
+      postBodyBuilder.addParam("proc_client_transaction_id",Long.toString(clientTransactionId));
 
-        postBodyBuilder.addParam("ctx_game_id",Integer.toString(session.getGameId()));
-        postBodyBuilder.addParam("ctx_gameset_id",Integer.toString(session.getDefaultGameSetId()));
-        postBodyBuilder.addParam("ctx_user_id",Long.toString(session.getMyUserId()));
-        postBodyBuilder.addParam("ctx_user_sid",userSid);
-        postBodyBuilder.addParam("ctx_dev_type",Integer.toString(session.getPlatform().getDeviceType()));
-        postBodyBuilder.addParam("ctx_dev_id",MNUtils.stringGetMD5String
-                                               (session.getPlatform().getUniqueDeviceIdentifier()));
-        postBodyBuilder.addParam("ctx_client_ver",MNSession.CLIENT_API_VERSION);
-
-        postBodyBuilder.addParam("proc_pack_id",joinIntegers(packIdArray));
-        postBodyBuilder.addParam("proc_pack_count",joinIntegers(packCountArray));
-        postBodyBuilder.addParam("proc_client_transaction_id",Long.toString(clientTransactionId));
-
-        checkoutRequests.sendRequest
+      requestHelper.sendWSRequest
          (webServerUrl + "/" + SilentPurchaseWebServicePath,
-          postBodyBuilder.toString(),
-          clientTransactionId);
-       }
-      else
-       {
-        dispatchCheckoutFailedEvent
-         (IEventHandler.ERROR_CODE_NETWORK_ERROR,
-          "user is not logged in",
-          clientTransactionId);
-       }
+          postBodyBuilder,clientTransactionId);
      }
     else
      {
@@ -690,245 +688,6 @@ public class MNVShopProvider
        (IEventHandler.ERROR_CODE_NETWORK_ERROR,
         "checkout endpoint is unreachable",
         clientTransactionId);
-     }
-   }
-
-  private void processPostVItemTransactionCmd (Element cmdElement)
-   {
-    String cliTransactionIdStr = null;
-    String srvTransactionIdStr = null;
-    String itemsToAddStr       = null;
-    boolean ok = true;
-
-    Element currElement = MNWSXmlTools.nodeGetFirstChildElement(cmdElement);
-
-    while (currElement != null)
-     {
-      String tagName = currElement.getTagName();
-
-      if      (tagName.equals("clientTransactionId"))
-       {
-        cliTransactionIdStr = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else if (tagName.equals("serverTransactionId"))
-       {
-        srvTransactionIdStr = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else if (tagName.equals("itemsToAdd"))
-       {
-        itemsToAddStr = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else
-       {
-        session.getPlatform().logWarning(TAG,"unknown element in 'postVItemTransaction' command");
-       }
-
-      currElement = MNWSXmlTools.nodeGetNextSiblingElement(currElement);
-     }
-
-    if (cliTransactionIdStr == null || srvTransactionIdStr == null)
-     {
-      ok = false;
-
-      session.getPlatform().logWarning(TAG,"transaction identifier is absent in 'postVItemTransaction' command");
-     }
-
-    if (ok)
-     {
-      HashMap<String,String> params = new HashMap<String,String>();
-
-      params.put("server_transaction_id",srvTransactionIdStr);
-      params.put("client_transaction_id",cliTransactionIdStr);
-      params.put("items_to_add",itemsToAddStr);
-
-      MNVItemsProvider.TransactionInfo transactionInfo
-       = vItemsProvider.applyTransactionWithParams(params,",",":");
-
-      if (transactionInfo != null)
-       {
-        dispatchCheckoutSucceededEvent(transactionInfo);
-       }
-      else
-       {
-        session.getPlatform().logWarning(TAG,"unable to process transaction - invalid parameters");
-       }
-     }
-   }
-
-  private void processPostSysEventCmd (Element cmdElement)
-   {
-    String eventName  = null;
-    String eventParam = null;
-    String callbackId = null;
-
-    Element currElement = MNWSXmlTools.nodeGetFirstChildElement(cmdElement);
-
-    while (currElement != null)
-     {
-      String tagName = currElement.getTagName();
-
-      if      (tagName.equals("eventName"))
-       {
-        eventName = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else if (tagName.equals("eventParam"))
-       {
-        eventParam = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else if (tagName.equals("callbackId"))
-       {
-        callbackId = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else
-       {
-        session.getPlatform().logWarning(TAG,"unknown element in 'postSysEvent' command");
-       }
-
-      currElement = MNWSXmlTools.nodeGetNextSiblingElement(currElement);
-     }
-
-    if (eventName != null)
-     {
-      session.postSysEvent(eventName,eventParam != null ? eventParam : "",callbackId);
-     }
-    else
-     {
-      session.getPlatform().logWarning(TAG,"event name is absent in 'postSysEvent' command");
-     }
-   }
-
-  private void processPostPluginMessageCmd (Element cmdElement)
-   {
-    String pluginName  = null;
-    String message     = null;
-
-    Element currElement = MNWSXmlTools.nodeGetFirstChildElement(cmdElement);
-
-    while (currElement != null)
-     {
-      String tagName = currElement.getTagName();
-
-      if      (tagName.equals("pluginName"))
-       {
-        pluginName = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else if (tagName.equals("pluginMessage"))
-       {
-        message = MNWSXmlTools.nodeGetTextContent(currElement);
-       }
-      else
-       {
-        session.getPlatform().logWarning(TAG,"unknown element in 'postPluginMessage' command");
-       }
-
-      currElement = MNWSXmlTools.nodeGetNextSiblingElement(currElement);
-     }
-
-    if (pluginName != null)
-     {
-      session.sendPluginMessage(pluginName,message != null ? message : "");
-     }
-    else
-     {
-      session.getPlatform().logWarning(TAG,"plugin name is absent in 'postPluginMessage' command");
-     }
-   }
-
-  synchronized private void processCheckoutVShopPackSilentResponse (String responseStr, long clientTransactionId)
-   {
-    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-    String errorMessage = null;
-    int    errorCode    = IEventHandler.ERROR_CODE_UNDEFINED;
-
-    try
-     {
-      DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-      Document        dom        = docBuilder.parse(new org.xml.sax.InputSource(new StringReader(responseStr)));
-      Element         docElement = dom.getDocumentElement();
-
-      if (docElement.getTagName().equals("responseData"))
-       {
-        Element currElement = MNWSXmlTools.nodeGetFirstChildElement(docElement);
-
-        if (currElement != null)
-         {
-          String tagName = currElement.getTagName();
-
-          if (tagName.equals("ctxUserId"))
-           {
-            long userId = MNUtils.parseLongWithDefault(MNWSXmlTools.nodeGetTextContent(currElement),MNConst.MN_USER_ID_UNDEFINED);
-
-            if (userId != MNConst.MN_USER_ID_UNDEFINED)
-             {
-              if (userId != session.getMyUserId())
-               {
-                return;
-               }
-
-              currElement = MNWSXmlTools.nodeGetNextSiblingElement(currElement);
-
-              while (currElement != null)
-               {
-                tagName = currElement.getTagName();
-
-                if (tagName.equals("postVItemTransaction"))
-                 {
-                  processPostVItemTransactionCmd(currElement);
-                 }
-                else if (tagName.equals("postSysEvent"))
-                 {
-                  processPostSysEventCmd(currElement);
-                 }
-                else if (tagName.equals("postPluginMessage"))
-                 {
-                  processPostPluginMessageCmd(currElement);
-                 }
-                else
-                 {
-                  session.getPlatform().logWarning(TAG,"invalid command in purchase ws request");
-                 }
-
-                currElement = MNWSXmlTools.nodeGetNextSiblingElement(currElement);
-               }
-             }
-            else
-             {
-              errorMessage = "response contains invalid user id value";
-              errorCode    = IEventHandler.ERROR_CODE_XML_STRUCTURE_ERROR;
-             }
-           }
-          else if (tagName.equals("errorMessage"))
-           {
-            errorMessage = MNWSXmlTools.nodeGetTextContent(currElement);
-            errorCode    = MNUtils.parseIntWithDefault(currElement.getAttribute("code"),WSFailedErrorCode);
-           }
-          else
-           {
-            errorMessage = "response contains neither 'ctxUserId' nor 'errorMessage' element";
-            errorCode    = IEventHandler.ERROR_CODE_XML_STRUCTURE_ERROR;
-           }
-         }
-        else
-         {
-          errorMessage = "response contains no data";
-          errorCode    = IEventHandler.ERROR_CODE_XML_STRUCTURE_ERROR;
-         }
-       }
-      else
-       {
-        errorMessage = "invalid document element in response";
-        errorCode    = IEventHandler.ERROR_CODE_XML_STRUCTURE_ERROR;
-       }
-     }
-    catch (Exception e)
-     {
-      errorMessage = e.getMessage();
-      errorCode    = IEventHandler.ERROR_CODE_XML_PARSE_ERROR;
-     }
-
-    if (errorMessage != null)
-     {
-      dispatchCheckoutFailedEvent(errorCode,errorMessage,clientTransactionId);
      }
    }
 
@@ -952,6 +711,18 @@ public class MNVShopProvider
   public void removeEventHandler (IEventHandler eventHandler)
    {
     eventHandlers.remove(eventHandler);
+   }
+
+  /**
+   * Sets custom in-app billing activity manager
+   *
+   * @param manager an object that implmements
+   * {@link IInAppBillingActivityManager IInAppBillingActivityManager} interface or
+   * null to restore default behavior
+   */
+  public void setInAppBillingActivityManager (IInAppBillingActivityManager manager)
+   {
+    inAppBilling.setInAppBillingActivityManager(manager);
    }
 
   private void onVShopPackListUpdated ()
@@ -1071,7 +842,7 @@ public class MNVShopProvider
          {
           final int errorCode         = MNUtils.parseIntWithDefault(params.get("error_code"),IEventHandler.ERROR_CODE_UNDEFINED);
           String    errorMessage      = params.get("error_message");
-          final long cliTransactionId = MNUtils.parseLongWithDefault(params.get("client_transaction_id"),0);
+          final long cliTransactionId = MNUtils.parseLongWithDefault(params.get("client_transaction_id"),MNVItemsProvider.TRANSACTION_ID_UNDEFINED);
 
           if (errorMessage == null)
            {
@@ -1098,7 +869,7 @@ public class MNVShopProvider
      });
    }
 
-  private void dispatchCheckoutFailedEvent (int errorCode, String errorMessage, long cliTransactionId)
+  /* package */ void dispatchCheckoutFailedEvent (int errorCode, String errorMessage, long cliTransactionId)
    {
     final IEventHandler.CheckoutVShopPackFailInfo info =
            (new IEventHandler.CheckoutVShopPackFailInfo
@@ -1125,109 +896,63 @@ public class MNVShopProvider
     return builder.toString();
    }
 
-  private class RequestSet implements MNURLStringDownloader.IEventHandler
+  //Note: this method is also used by MNVShopInAppBilling
+  /* package */ void processPostVItemTransactionCmd (long    srvTransactionId,
+                                                     long    cliTransactionId,
+                                                     String  itemsToAddStr,
+                                                     boolean vShopTransactionEnabled)
    {
-    public RequestSet ()
+    HashMap<String,String> params = new HashMap<String,String>();
+
+    params.put("server_transaction_id",Long.toString(srvTransactionId));
+    params.put("client_transaction_id",Long.toString(cliTransactionId));
+    params.put("items_to_add",itemsToAddStr);
+
+    MNVItemsProvider.TransactionInfo transactionInfo
+     = vItemsProvider.applyTransactionWithParams(params,",",":");
+
+    if (transactionInfo != null)
      {
-      requests = new ArrayList<RequestInfo>();
-     }
-
-    public synchronized void sendRequest (String requestUrl,
-                                          String postBody,
-                                          long   clientTransactionId)
-     {
-      MNURLStringDownloader downloader = new MNURLStringDownloader();
-
-      requests.add(new RequestInfo(downloader,clientTransactionId));
-
-      downloader.loadURL(requestUrl,postBody,this);
-     }
-
-    public synchronized void cancelAll ()
-     {
-      while (!requests.isEmpty())
+      if (vShopTransactionEnabled)
        {
-        RequestInfo requestInfo = requests.remove(requests.size() - 1);
-
-        requestInfo.downloader.cancel();
+        dispatchCheckoutSucceededEvent(transactionInfo);
        }
      }
-
-    private int findRequestIndex (MNURLDownloader downloader)
+    else
      {
-      int         index       = 0;
-      int         count       = requests.size();
-      boolean     found       = false;
+      session.getPlatform().logWarning(TAG,"unable to process transaction - invalid parameters");
+     }
+   }
 
-      while (index < count && !found)
-       {
-        RequestInfo requestInfo = requests.get(index);
 
-        if (requestInfo.downloader == downloader)
-         {
-          found = true;
-         }
-        else
-         {
-          index++;
-         }
-       }
-
-      return found ? index : -1;
+  private class RequestHelperEventHandler implements MNVShopWSRequestHelper.IEventHandler
+   {
+    public boolean vShopShouldParseResponse  (long   userId)
+     {
+      return userId == session.getMyUserId();
      }
 
-    private RequestInfo findRequest (MNURLDownloader downloader)
+    public void    vShopPostVItemTransaction (long    srvTransactionId,
+                                              long    cliTransactionId,
+                                              String  itemsToAddStr,
+                                              boolean vShopTransactionEnabled)
      {
-      int index = findRequestIndex(downloader);
-
-      return index >= 0 ? requests.get(index) : null;
+      processPostVItemTransactionCmd
+       (srvTransactionId,cliTransactionId,itemsToAddStr,vShopTransactionEnabled);
      }
 
-    private void finishRequest (MNURLDownloader downloader)
+    public void    vShopFinishTransaction    (String transactionId)
      {
-      int index = findRequestIndex(downloader);
-
-      if (index >= 0)
-       {
-        requests.remove(index);
-       }
+      // this command shouldn't be issued for "silent" requests,
+      // so just ignore it if it get called
      }
 
-    public synchronized void downloaderDataReady (MNURLDownloader downloader, String str)
+    public void    vShopWSRequestFailed      (long   clientTransactionId,
+                                              int    errorCode,
+                                              String errorMessage)
      {
-      RequestInfo requestInfo         = findRequest(downloader);
-      long        clientTransactionId = requestInfo != null ? requestInfo.clientTransactionId : 0;
-
-      processCheckoutVShopPackSilentResponse(str,clientTransactionId);
-
-      finishRequest(downloader);
+      dispatchCheckoutFailedEvent(errorCode,errorMessage,clientTransactionId);
      }
-
-    public synchronized void downloaderLoadFailed (MNURLDownloader downloader, MNURLDownloader.ErrorInfo errorInfo)
-     {
-      RequestInfo requestInfo         = findRequest(downloader);
-      long        clientTransactionId = requestInfo != null ? requestInfo.clientTransactionId : 0;
-
-      dispatchCheckoutFailedEvent
-       (IEventHandler.ERROR_CODE_NETWORK_ERROR,errorInfo.getMessage(),clientTransactionId);
-
-      finishRequest(downloader);
-     }
-
-    private class RequestInfo
-     {
-      public MNURLStringDownloader downloader;
-      public long                  clientTransactionId;
-
-      public RequestInfo (MNURLStringDownloader downloader,
-                          long                  clientTransactionId)
-       {
-        this.downloader          = downloader;
-        this.clientTransactionId = clientTransactionId;
-       }
-     }
-
-    private final ArrayList<RequestInfo> requests;
    }
 
   private final MNSession                          session;
@@ -1235,13 +960,13 @@ public class MNVShopProvider
   private final SessionEventHandler                sessionEventHandler;
   private final MNEventHandlerArray<IEventHandler> eventHandlers;
   private final MNVItemsProvider                   vItemsProvider;
-  private final RequestSet                         checkoutRequests;
+  private final MNVShopWSRequestHelper             requestHelper;
+  private final MNVShopInAppBilling                inAppBilling;
 
   private static final String DATA_FILE_NAME = "MNVShopProvider.xml";
   private static final String[] VShopPackListEntriesXmlPath = { "GameVocabulary", "MNVShopProvider", "VShopPacks" };
   private static final String[] VShopCategoryListEntriesXmlPath = { "GameVocabulary", "MNVShopProvider", "VShopCategories" };
   private static final String TAG = "MNVShopProvider";
   private static final String SilentPurchaseWebServicePath = "user_ajax_proc_silent_purchase.php";
-  private static final int    WSFailedErrorCode = 100;
  }
 

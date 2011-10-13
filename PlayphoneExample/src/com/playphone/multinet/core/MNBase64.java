@@ -7,7 +7,7 @@
 
 package com.playphone.multinet.core;
 
-final class MNBase64
+public final class MNBase64
  {
   public static String encode (byte[] data)
    {

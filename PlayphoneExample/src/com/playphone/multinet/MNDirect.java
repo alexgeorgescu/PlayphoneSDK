@@ -21,11 +21,13 @@ import com.playphone.multinet.core.MNUtils;
 import com.playphone.multinet.providers.MNAchievementsProvider;
 import com.playphone.multinet.providers.MNClientRobotsProvider;
 import com.playphone.multinet.providers.MNGameCookiesProvider;
+import com.playphone.multinet.providers.MNGameRoomCookiesProvider;
 import com.playphone.multinet.providers.MNMyHiScoresProvider;
 import com.playphone.multinet.providers.MNPlayerListProvider;
 import com.playphone.multinet.providers.MNScoreProgressProvider;
 import com.playphone.multinet.providers.MNVItemsProvider;
 import com.playphone.multinet.providers.MNVShopProvider;
+import com.playphone.multinet.providers.MNGameSettingsProvider;
 
 /**
  * A class representing MultiNet "Direct" API.
@@ -377,6 +379,16 @@ public class MNDirect
    }
 
   /**
+   * Returns game room cookies provider instance.
+   *
+   * @return <code>MNGameRoomCookiesProvider</code> object
+   */
+  public static MNGameRoomCookiesProvider getGameRoomCookiesProvider ()
+   {
+    return gameRoomCookiesProvider;
+   }
+
+  /**
    * Returns hi-scores provider instance.
    *
    * @return <code>MNMyHiScoresProvider</code> object
@@ -424,6 +436,16 @@ public class MNDirect
   public static MNVShopProvider getVShopProvider ()
    {
     return vShopProvider;
+   }
+
+  /**
+   * Returns game settings provider instance.
+   *
+   * @return <code>MNGameSettingsProvider</code> object
+   */
+  public static MNGameSettingsProvider getGameSettingsProvider ()
+   {
+    return gameSettingsProvider;
    }
 
   private static class SessionEventHandler
@@ -584,14 +606,16 @@ public class MNDirect
    {
     releaseProviders();
 
-    achievementsProvider  = new MNAchievementsProvider(session);
-    clientRobotsProvider  = new MNClientRobotsProvider(session);
-    gameCookiesProvider   = new MNGameCookiesProvider(session);
-    myHiScoresProvider    = new MNMyHiScoresProvider(session);
-    playerListProvider    = new MNPlayerListProvider(session);
-    scoreProgressProvider = new MNScoreProgressProvider(session);
-    vItemsProvider        = new MNVItemsProvider(session);
-    vShopProvider         = new MNVShopProvider(session,vItemsProvider);
+    achievementsProvider    = new MNAchievementsProvider(session);
+    clientRobotsProvider    = new MNClientRobotsProvider(session);
+    gameCookiesProvider     = new MNGameCookiesProvider(session);
+    gameRoomCookiesProvider = new MNGameRoomCookiesProvider(session);
+    myHiScoresProvider      = new MNMyHiScoresProvider(session);
+    playerListProvider      = new MNPlayerListProvider(session);
+    scoreProgressProvider   = new MNScoreProgressProvider(session);
+    vItemsProvider          = new MNVItemsProvider(session);
+    vShopProvider           = new MNVShopProvider(session,vItemsProvider);
+    gameSettingsProvider    = new MNGameSettingsProvider(session);
    }
 
   private static void releaseProviders ()
@@ -609,6 +633,11 @@ public class MNDirect
     if (gameCookiesProvider != null)
      {
       gameCookiesProvider.shutdown(); gameCookiesProvider = null;
+     }
+
+    if (gameRoomCookiesProvider != null)
+     {
+      gameRoomCookiesProvider.shutdown(); gameRoomCookiesProvider = null;
      }
 
     if (myHiScoresProvider != null)
@@ -631,6 +660,11 @@ public class MNDirect
       vShopProvider.shutdown(); vShopProvider = null;
      }
 
+    if (gameSettingsProvider != null)
+     {
+      gameSettingsProvider.shutdown(); gameSettingsProvider = null;
+     }
+
     scoreProgressProvider = null;
    }
 
@@ -638,13 +672,15 @@ public class MNDirect
   private static MNUserProfileView     view;
   private static SessionEventHandler   sessionEventHandler;
 
-  private static MNAchievementsProvider  achievementsProvider;
-  private static MNClientRobotsProvider  clientRobotsProvider;
-  private static MNGameCookiesProvider   gameCookiesProvider;
-  private static MNMyHiScoresProvider    myHiScoresProvider;
-  private static MNPlayerListProvider    playerListProvider;
-  private static MNScoreProgressProvider scoreProgressProvider;
-  private static MNVItemsProvider        vItemsProvider;
-  private static MNVShopProvider         vShopProvider;
+  private static MNAchievementsProvider    achievementsProvider;
+  private static MNClientRobotsProvider    clientRobotsProvider;
+  private static MNGameCookiesProvider     gameCookiesProvider;
+  private static MNGameRoomCookiesProvider gameRoomCookiesProvider;
+  private static MNMyHiScoresProvider      myHiScoresProvider;
+  private static MNPlayerListProvider      playerListProvider;
+  private static MNScoreProgressProvider   scoreProgressProvider;
+  private static MNVItemsProvider          vItemsProvider;
+  private static MNVShopProvider           vShopProvider;
+  private static MNGameSettingsProvider    gameSettingsProvider;
  }
 

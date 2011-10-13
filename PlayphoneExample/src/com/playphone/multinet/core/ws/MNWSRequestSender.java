@@ -32,6 +32,7 @@ import com.playphone.multinet.core.ws.data.MNWSCurrUserSubscriptionStatus;
 import com.playphone.multinet.core.ws.data.MNWSCurrentUserInfo;
 import com.playphone.multinet.core.ws.data.MNWSRoomListItem;
 import com.playphone.multinet.core.ws.data.MNWSRoomUserInfoItem;
+import com.playphone.multinet.core.ws.data.MNWSUserGameCookie;
 
 public class MNWSRequestSender
  {
@@ -319,7 +320,17 @@ public class MNWSRequestSender
                           return new MNWSRoomUserInfoItem();
                          }
                        }));
-   }
+    parsers.put("anyUserGameCookies",
+                new MNWSXmlGenericItemListParser
+                     ("anyUserGameCookieItem",
+                      new MNWSXmlGenericItemParser()
+                       {
+                        public MNWSGenericItem createNewItem ()
+                         {
+                          return new MNWSUserGameCookie();
+                         }
+                       }));
+    }
 
   private MNSession                          session;
   private HashMap<String,IMNWSXmlDataParser> parsers;

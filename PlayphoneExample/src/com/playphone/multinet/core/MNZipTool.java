@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipEntry;
@@ -139,12 +140,17 @@ public class MNZipTool
            {
             dataStream = zip.getInputStream(entry);
 
-            data = new byte[(int)entrySize];
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-            if (dataStream.read(data) != entrySize)
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int    readSize;
+
+            while ((readSize = dataStream.read(buffer)) != -1)
              {
-              data = null;
+              outStream.write(buffer,0,readSize);
              }
+
+            data = outStream.toByteArray();
            }
           catch (IOException e)
            {
@@ -203,13 +209,17 @@ public class MNZipTool
 
             if (entrySize <= Integer.MAX_VALUE)
              {
-              data = new byte[(int)entrySize];
+              ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-              if (zipStream.read(data) < entrySize)
+              byte[] buffer = new byte[BUFFER_SIZE];
+              int    readSize;
+
+              while ((readSize = zipStream.read(buffer)) != -1)
                {
-                data = null;
-                ok   = false;
+                outStream.write(buffer,0,readSize);
                }
+
+              data = outStream.toByteArray();
              }
             else
              {

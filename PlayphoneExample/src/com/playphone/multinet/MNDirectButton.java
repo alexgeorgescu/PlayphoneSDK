@@ -256,10 +256,11 @@ public class MNDirectButton  {
 			mBindCount++;
 			Helper.setContext(activity);
 			final PopupWindow btn = Helper.getButton();
+			final MNSession session = MNDirect.getSession();
 			
-			if (Helper.getButton() != null) {
-				MNDirect.getSession().removeEventHandler(sessionEventHandler);
-				MNDirect.getSession().addEventHandler(sessionEventHandler);
+			if (btn != null) {
+				session.removeEventHandler(sessionEventHandler);
+				session.addEventHandler(sessionEventHandler);
 			}
 			final View bindView = activity.getWindow().peekDecorView();
 			
@@ -281,7 +282,6 @@ public class MNDirectButton  {
 						btn.getContentView().setVisibility(View.GONE);
 					}
 
-					final MNSession session = MNDirect.getSession();
 					
 					if (session != null) {
 						int newImgId = getIdOfButtonPic(session.getStatus(),

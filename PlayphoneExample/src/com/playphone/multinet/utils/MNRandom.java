@@ -33,7 +33,7 @@ public class MNRandom
   /**
    * Sets new seed value.
    *
-   * @param new seed value
+   * @param seed new seed value
    */
   public synchronized void setSeed (long seed)
    {
@@ -117,7 +117,7 @@ public class MNRandom
   /**
    * Sets new seed value.
    *
-   * @param new seed value
+   * @param seed new seed value
    */
   public void srand (long seed)
    {
@@ -145,7 +145,7 @@ public class MNRandom
   /**
    * Sets new seed value.
    *
-   * @param new seed value
+   * @param seed new seed value
    */
   public void srandom (long seed)
    {

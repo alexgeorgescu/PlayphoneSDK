@@ -84,7 +84,7 @@ public class MNGameParams
   /**
    * Returns value for specified gameset play parameter.
    *
-   * @param paramValue gameset parameter
+   * @param paramName parameter name
    * @return specified parameter value or <code>null</code> if
    * parameter could not be found
    */

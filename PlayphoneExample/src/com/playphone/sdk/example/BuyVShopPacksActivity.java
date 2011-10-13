@@ -146,8 +146,17 @@ public class BuyVShopPacksActivity extends CustomTitleActivity implements OnClic
 			final int[] packs   = { currentSelectedPack.id};
 			final int[] amounts = { 1 };
 			 
+			/*
+			if(currentSelectedPack.id == 1004)
+			{
+			MNDirect.getVShopProvider().procCheckoutVShopPacksSilent
+			 (packs,amounts,MNDirect.getVItemsProvider().getNewClientTransactionId());
+			}
+			else
+			{*/
 			MNDirect.getVShopProvider().execCheckoutVShopPacks
 			 (packs,amounts,MNDirect.getVItemsProvider().getNewClientTransactionId());
+			//}
 		}
 		
 	}
